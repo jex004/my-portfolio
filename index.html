@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio</title>
+  
+  <!-- Google Fonts -->
+  <link
+  href="https://fonts.googleapis.com/css2?
+        family=Rubik:wght@400;700&
+        family=Roboto:wght@300;400&
+        family=Shadows+Into+Light&
+        display=swap"
+  rel="stylesheet"
+/>
+  
+  <!-- Font Awesome for Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-pI6Yb0DjY1b+FzG+VJQ+uKXVsW4WzQxZ8VfKH0f4ne8B+z8gvQGRqBXhJoLdkThL8WyTNsCg0MOLQxP43rYfZA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">Jenny Xu</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-card">
+      <img src="profile.jpg" alt="My Photo" class="avatar" />
+      <h1 class="handwritten">Hi! I'm Jenny</h1>
+      <p class="tagline">
+        illustrator • designer • developer<br/>
+        undergrad at UCSD
+      </p>
+    </section>
+  </main>
+
+  <!-- FOOTER WITH SEAMLESS LIQUID EFFECT -->
+  <footer>
+    <!-- The SVG that creates the animated liquid effect -->
+    <svg class="liquid-fill" viewBox="0 0 1000 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <!-- CORRECTED PATH: Ensures the two 1000-unit cycles are identical -->
+            <path id="wavepath" d="M0 100 C250 50 250 50 500 100 S750 150 1000 100 S1250 50 1500 100 S1750 150 2000 100 V300 H0 Z">
+                <animateTransform attributeName="transform" type="translate" from="0,0" to="-1000,0" dur="6s" repeatCount="indefinite"/>
+            </path>
+        </defs>
+        <!-- The layered waves for a depth effect -->
+        <use xlink:href="#wavepath" x="0" y="5" fill="rgba(159,215,224,0.3)" />
+        <use xlink:href="#wavepath" x="0" y="10" fill="rgba(159,215,224,0.5)" />
+        <use xlink:href="#wavepath" x="0" y="15" fill="var(--blue)" />
+    </svg>
+
+    <!-- Content that floats on top of the liquid -->
+    <div class="footer-content">
+      <div class="icon-row">
+        <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      </div>
+      <p class="copyright-text">© 2025 Jenny Xu</p>
+    </div>
+
+    <!-- cute skoggy image, also on top -->
+    <img src="imgs/skoggy.png" alt="skoggy" class="footer_skoggy">
+  </footer>
+</body>
+</html>
