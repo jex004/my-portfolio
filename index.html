@@ -7,22 +7,9 @@
   
   <!-- Google Fonts -->
   <link
-  href="https://fonts.googleapis.com/css2?
-        family=Rubik:wght@400;700&
-        family=Roboto:wght@300;400&
-        family=Shadows+Into+Light&
-        display=swap"
+  href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&family=Roboto:wght@300;400&family=Shadows+Into+Light&display=swap"
   rel="stylesheet"
 />
-  
-  <!-- Font Awesome for Icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-pI6Yb0DjY1b+FzG+VJQ+uKXVsW4WzQxZ8VfKH0f4ne8B+z8gvQGRqBXhJoLdkThL8WyTNsCg0MOLQxP43rYfZA=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
 
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -30,53 +17,69 @@
   <header>
     <div class="logo">Jenny Xu</div>
     <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
+      <!-- These links will now open windows via JavaScript -->
+      <a href="#" data-window-id="about">About</a>
+      <a href="#" data-window-id="projects">Projects</a>
+      <a href="#" data-window-id="skills">Skills</a>
+      <a href="#" data-window-id="contact">Contact</a>
     </nav>
   </header>
 
-  <main>
-    <section class="hero-card">
-      <img src="profile.jpg" alt="My Photo" class="avatar" />
+  <!-- This is the "desktop" area where windows will appear -->
+  <main id="desktop"></main>
+
+  <!-- Hidden templates for the content of each window -->
+  <div id="window-templates" style="display: none;">
+    <div id="about-content">
+      <img src="main-avatar.jpg" alt="My Photo" class="avatar" />
       <h1 class="handwritten">Hi! I'm Jenny</h1>
       <p class="tagline">
         illustrator • designer • developer<br/>
         undergrad at UCSD
       </p>
-    </section>
-  </main>
+    </div>
+    <div id="projects-content">
+      <h2>My Projects</h2>
+      <p>This is where I'll showcase my work soon!</p>
+    </div>
+    <div id="skills-content">
+      <h2>My Skills</h2>
+      <p>A list of my skills will go here.</p>
+    </div>
+    <div id="contact-content">
+      <h2>Get In Touch</h2>
+      <p>The best way to reach me is by email!</p>
+      <a href="mailto:jenny.xu@example.com" class="email-link">jenny.xu@example.com</a>
+    </div>
+  </div>
 
-  <!-- FOOTER WITH SEAMLESS LIQUID EFFECT -->
   <footer>
-    <!-- The SVG that creates the animated liquid effect -->
     <svg class="liquid-fill" viewBox="0 0 1000 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-            <!-- CORRECTED PATH: Ensures the two 1000-unit cycles are identical -->
-            <path id="wavepath" d="M0 100 C250 50 250 50 500 100 S750 150 1000 100 S1250 50 1500 100 S1750 150 2000 100 V300 H0 Z">
-                <animateTransform attributeName="transform" type="translate" from="0,0" to="-1000,0" dur="6s" repeatCount="indefinite"/>
+            <path id="wavepath" d="M0 100 C250 80 250 80 500 100 S750 120 1000 100 S1250 80 1500 100 S1750 120 2000 100 V300 H0 Z">
+                <animateTransform attributeName="transform" type="translate" from="0,0" to="-1000,0" dur="2s" repeatCount="indefinite"/>
             </path>
         </defs>
-        <!-- The layered waves for a depth effect -->
         <use xlink:href="#wavepath" x="0" y="5" fill="rgba(159,215,224,0.3)" />
         <use xlink:href="#wavepath" x="0" y="10" fill="rgba(159,215,224,0.5)" />
         <use xlink:href="#wavepath" x="0" y="15" fill="var(--blue)" />
     </svg>
-
-    <!-- Content that floats on top of the liquid -->
     <div class="footer-content">
       <div class="icon-row">
-        <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
-        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/jenny-xu-7b281b272/" target="_blank" rel="noopener noreferrer" class="icon-link icon-linkedin" aria-label="LinkedIn"></a>
+        <a href="#" class="icon-link icon-discord" aria-label="Discord"></a>
+        <a href="https://github.com/jex004" target="_blank" rel="noopener noreferrer" class="icon-link icon-github" aria-label="GitHub"></a>
+        <a href="https://www.instagram.com/jenny._.xu/" target="_blank" rel="noopener noreferrer" class="icon-link icon-instagram" aria-label="Instagram"></a>
       </div>
       <p class="copyright-text">© 2025 Jenny Xu</p>
     </div>
-
-    <!-- cute skoggy image, also on top -->
-    <img src="imgs/skoggy.png" alt="skoggy" class="footer_skoggy">
+    <!-- Skoggy is now INSIDE the footer for easier positioning -->
+    <img src="imgs/skoggy.png" class="footer-skoggy" alt="A cute teddy bear named skoggy" />
   </footer>
+
+  <!-- Interact.js is required for dragging and resizing -->
+  <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script>
+  <!-- Your custom script file -->
+  <script src="script.js" defer></script>
 </body>
 </html>

@@ -3,180 +3,153 @@
   --blue:  #9fd7e0;
   --white: #ffffff;
   --text-dark: #595959;
+  --text-light-grey: #7f8c8d;
+  --highlight-orange: #e67e22;
+  --border-grey: #e0e0e0;
+  --header-dark: #424242;
+  --bg-light-grey: #f0f2f5; 
 }
 
 /* RESET & BASE */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  font-family: 'Roboto', sans-serif;
-  color: var(--text-dark);
-  background: var(--white);
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+* {margin:0;padding:0;box-sizing:border-box}
+body {font-family:'Roboto',sans-serif;color:var(--text-dark);background-color:var(--bg-light-grey);display:flex;flex-direction:column;min-height:100vh; overflow: hidden;}
 
 /* HEADER */
-header {
-  background: var(--blue);
-  padding: 1rem 2rem;
+header{background:var(--blue);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center; z-index: 100;}
+header .logo{font-family:'Shadows Into Light',cursive;font-size:1.5rem}
+header nav a{margin-left:1.5rem;text-decoration:none;font-weight:500;color:var(--text-dark); cursor: pointer;}
+header nav a:hover{color:var(--white)}
+
+/* MAIN "DESKTOP" AREA */
+main {flex:1;position: relative; padding: 4rem 2rem;}
+
+/* DRAGGABLE WINDOW STYLES */
+.window, .hero-window {
+  position: absolute;
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-grey);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  resize: both;
+}
+
+.window.is-active, .hero-window.is-active {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.hero-window {
+  width: 700px;
+  height: 500px;
+  max-width: 90vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.window {
+  width: 500px;
+  height: 350px;
+}
+
+.window-header {
+  background-color: var(--header-dark);
+  color: #dcdcdc;
+  padding: .5rem 1rem;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 700;
+  cursor: move;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-shrink: 0;
 }
-header .logo {
-  font-family: 'Shadows Into Light', cursive;
-  font-size: 1.5rem;
-}
-header nav a {
-  margin-left: 1.5rem;
-  text-decoration: none;
-  font-weight: 500;
-  color: var(--text-dark);
-}
-header nav a:hover {
-  color: var(--blue);
-}
+.window-controls button {width: 14px; height: 14px; border-radius: 50%; border: none; cursor: pointer;}
+.close-btn { background-color: #ff5f57; }
 
-/* MAIN / HERO CARD */
-main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.window-content {
   padding: 2rem;
-}
-.hero-card {
-  background: var(--white);
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   text-align: center;
-  padding: 2rem;
-  max-width: 360px;
-  width: 100%;
-}
-.hero-card .avatar {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid var(--white);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  margin-bottom: 1rem;
-}
-.hero-card h1 {
-  font-family: 'Rubik', sans-serif;
-  font-weight: 700;
-  font-size: 2rem;
-  color: var(--pink);
-}
-.hero-card .handwritten {
-  font-family: 'Shadows Into Light', cursive;
-}
-.hero-card .tagline {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  color: var(--text-dark);
-  line-height: 1.4;
-  margin-bottom: 1.5rem;
-}
-
-
-/* FOOTER & LIQUID EFFECT */
-footer {
-  position: relative; /* Anchor for absolutely positioned children */
-  height: 250px; /* The total height of the liquid area */
-  width: 100%;
-  overflow: hidden; /* Hide parts of the wave that go outside */
-}
-
-.liquid-fill {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 200%; /* Make SVG wider than screen to ensure seamless animation */
-  height: 100%;
-  z-index: 1; /* Behind the content */
-}
-
-/* Content on top of the waves */
-.footer-content {
-  position: relative; /* Use relative to stack on top */
-  width: 100%;
-  height: 100%; /* Make content container fill the footer */
-  z-index: 10; /* Above the waves */
+  flex-grow: 1;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  padding-top: 40px; /* Adjust padding to position content vertically */
 }
 
-.icon-row {
-  display: flex;
-  justify-content: center;
-  gap: 1.25rem;
+.avatar {width: 160px;height: 160px;border-radius: 50%;object-fit: cover;border: 4px solid var(--white);box-shadow: 0 2px 8px rgba(0,0,0,0.1);margin-bottom: 1.5rem;}
+.window-content h1 {font-family: 'Rubik', sans-serif;font-weight: 700;font-size: 2.5rem;color: var(--pink);}
+.window-content .handwritten {font-family: 'Rubik', sans-serif;}
+.window-content .tagline {font-family: 'Rubik', sans-serif;font-weight: 400;color: var(--text-dark);line-height: 1.4;margin-top: 0.5rem;}
+.window-content h2 {font-family: 'Rubik', sans-serif;font-weight: 700;font-size: 2rem;margin-bottom: 1rem;}
+.email-link{display:inline-block;margin-top:1rem;color:var(--highlight-orange);font-weight:bold;text-decoration:none}
+.email-link:hover{text-decoration:underline}
+
+/* === FOOTER WITH DEEP WAVE OVERLAP === */
+footer {
+  position: relative;
+  z-index: 1; /* Sits behind hero card */
+  width: 100%;
+  
+  /* CHANGED: Made footer taller and pulled it up */
+  height: 50vh; /* Takes up half the viewport height. Adjust as you like! */
+  margin-top: -25vh; /* Pulls the footer up by half its new height */
 }
 
-.icon-row a {
-  font-size: 1.2rem;
-  color: var(--text-dark);
-  background: rgba(255, 255, 255, 0.4);
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+.liquid-fill {position:absolute;bottom:0;left:0;width:200%;height:100%;z-index:1}
+
+.footer-content {
+  position:relative;
+  width:100%;
+  height:100%;
+  z-index:10;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-end; /* Pushes content to the bottom */
+  gap:1.5rem;
+  padding-bottom: 3rem; /* A bit more padding from the bottom edge */
 }
 
-.icon-row a:hover {
-  background: var(--white);
-  color: var(--pink);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
+.icon-row{display:flex;justify-content:center;gap:1rem}
+.icon-link{display:block;width:70px;height:70px;background-repeat:no-repeat;background-position:center;background-size:150%;border-radius:50%;transition:all .3s ease}
+.icon-link:hover{transform:translateY(-3px) scale(1.05)}
+.icon-linkedin{background-image:url(imgs/linkedin-icon.png)}.icon-discord{background-image:url(imgs/discord-icon.png)}.icon-github{background-image:url(imgs/github-icon.png)}.icon-instagram{background-image:url(imgs/instagram-icon.png)}
 
-.copyright-text {
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: var(--white); /* CHANGED: White text is more readable */
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2); /* ADDED: Shadow for legibility */
-}
+.copyright-text{font-size:.9rem;font-weight:400;color:var(--white);text-shadow:0 1px 2px rgba(0,0,0,.2)}
 
-/* Skoggy Image styling */
+/* Skoggy's position adjusted for the taller footer */
 .footer-skoggy {
   position: absolute;
-  bottom: 25px; /* Adjust to sit on the wave */
-  right: 5%;
-  width: 90px;
-  height: auto;
-  z-index: 11; /* Above everything */
+  z-index: 3; /* On top of the hero card */
+  right: 15%;
+  width: 200px;
   transition: transform 0.4s ease-in-out;
+
+  /* CHANGED: Positions Skoggy on the new, taller wave */
+  bottom: 22vh; /* Adjust this vh value to move up/down */
 }
 .footer-skoggy:hover {
   transform: scale(1.1) rotate(5deg) translateY(-5px);
 }
 
-/* Responsive adjustments */
+/* RESPONSIVE ADJUSTMENTS */
 @media (max-width: 768px) {
+  main {padding: 2rem 1rem}
+  .hero-window {max-width: 95vw; height: auto; min-height: 400px;}
   footer {
-    height: 200px; /* A little shorter on mobile */
+    height: 40vh; /* A bit shorter on mobile */
+    margin-top: -20vh;
   }
   .footer-content {
-    padding-top: 30px;
+    padding-bottom: 1.5rem;
   }
   .footer-skoggy {
-    width: 70px;
-    bottom: 15px;
-    right: 3%;
+    width: 120px; 
+    right: 5%; 
+    bottom: 15vh;
   }
 }
