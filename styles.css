@@ -12,18 +12,7 @@
 
 * {margin:0;padding:0;box-sizing:border-box}
 body {font-family:'Roboto',sans-serif;color:var(--text-dark);background-color:var(--bg-light-grey);display:flex;flex-direction:column;min-height:100vh; overflow: hidden; transition: background-color var(--transition-speed), color var(--transition-speed);}
-
-/* HEADER */
-header{
-  background:var(--blue);
-  padding:1rem 2rem;
-  display:flex;
-  justify-content:space-between;
-  align-items:center; 
-  position: relative; 
-  z-index: 2; 
-  transition: background-color var(--transition-speed);
-}
+header{background:var(--blue);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center; position: relative; z-index: 2; transition: background-color var(--transition-speed);}
 header nav a{margin-left:1.5rem;text-decoration:none;font-weight:500;color:var(--text-dark); cursor: pointer;}
 header nav a:hover{color:var(--white)}
 
@@ -36,7 +25,6 @@ header nav a:hover{color:var(--white)}
 
 main { flex: 1; }
 
-/* WINDOW STYLES */
 .window, .home-window {
   position: absolute; background: var(--white); border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); border: 1px solid var(--window-border);
@@ -60,12 +48,8 @@ main { flex: 1; }
 .window-controls button {width: 14px; height: 14px; border-radius: 50%; border: none; cursor: pointer;}
 .close-btn { background-color: #ff5f57; }
 
-.window-content {
-  padding: 2rem; text-align: center; flex-grow: 1; overflow-y: auto;
-  display: flex; flex-direction: column; justify-content: center; align-items: center;
-}
+.window-content {padding: 2rem; text-align: center; flex-grow: 1; overflow-y: auto;display: flex; flex-direction: column; justify-content: center; align-items: center;}
 .window-content.is-document {justify-content:flex-start;align-items:stretch;padding:1.5rem 2rem;}
-
 .avatar {width: 210px;height: 210px;border-radius: 50%;object-fit: cover;border: 4px solid var(--white);box-shadow: 0 2px 8px rgba(0,0,0,0.1);margin-bottom: 1.5rem;}
 .window-content h1 {font-family: 'Rubik', sans-serif;font-weight: 700;font-size: 2.5rem;color: var(--pink);}
 .window-content .tagline {font-family: 'Rubik', sans-serif;font-weight: 400;color: var(--text-dark);line-height: 1.4;margin-top: 0.5rem;}
@@ -73,23 +57,22 @@ main { flex: 1; }
 .about-text { max-width: 400px; line-height: 1.6; }
 .email-link{display:inline-block;margin-top:1rem;color:#e67e22;font-weight:bold;text-decoration:none}
 .email-link:hover{text-decoration:underline}
-
-/* RESUME STYLES */
+.projects-list {width: 100%;height: 100%;text-align: left;}
+.projects-list h2 {text-align: center;margin-bottom: 1.5rem;}
+.project-card {background-color: #fafafa;border: 1px solid var(--border-grey);border-radius: 8px;padding: 1.5rem;box-shadow: 2px 2px 5px rgba(0,0,0,0.05);margin-bottom: 1.5rem;}
+[data-theme="dark"] .project-card {background-color: #333;border-color: #555;}
+.project-card h4 {font-family: 'Rubik', sans-serif;font-size: 1.2rem;color: var(--text-dark);margin-bottom: 0.5rem;}
+.project-card p {font-family: 'Roboto', sans-serif;line-height: 1.5;margin-bottom: 1rem;}
+.project-card a {font-weight: bold;color: #0056b3;text-decoration: none;}
+[data-theme="dark"] .project-card a {color: var(--pink);}
+.project-card a:hover {text-decoration: underline;}
+.project-links {display: flex;gap: 1.5rem;margin-top: 1rem;}
 .resume {font-family: 'Times New Roman', Times, serif;text-align: left;width: 100%;color: #000;}
 [data-theme="dark"] .resume {color: var(--text-dark);}
 .resume-header {text-align: center;padding: 1rem;margin-bottom: 1rem;background-color: var(--pink);border-radius: 6px;}
-
-/* === THIS IS THE CHANGE === */
-.resume-header h2, .resume-header p {
-  color: #000; /* Force black text for high contrast */
-}
-.resume a {
-  color: #0056b3;
-  text-decoration: none;
-}
+.resume-header h2, .resume-header p {color: #5D4037;}
+.resume a {color: #0056b3;text-decoration: none;}
 [data-theme="dark"] .resume a {color: var(--blue);}
-/* ======================== */
-
 .resume a:hover {text-decoration: underline;}
 .resume-header h2 {font-size: 2rem;margin-bottom: 0.25rem;font-family: 'Times New Roman', Times, serif;}
 .resume-header p {font-size: 0.9rem;}
@@ -113,8 +96,22 @@ footer {position: fixed; bottom: 0; left: 0;z-index: 1; width: 100%; height: 400
 .icon-link:hover{transform:translateY(-3px) scale(1.05)}
 .icon-linkedin{background-image:url(imgs/linkedin-icon.png)}.icon-discord{background-image:url(imgs/discord-icon.png)}.icon-github{background-image:url(imgs/github-icon.png)}.icon-instagram{background-image:url(imgs/instagram-icon.png)}
 .copyright-text{font-size:.9rem;font-weight:400;color:var(--white);text-shadow:0 1px 2px rgba(0,0,0,.2)}
-.footer-skoggy {position:absolute;z-index: 11;right: 8%;width: 420px;transition: transform 0.4s ease-in-out;bottom: 50px;}
-.footer-skoggy:hover {transform: scale(1.1) rotate(5deg) translateY(-5px);}
+
+/* === FINAL, SIMPLIFIED SKOGGY STYLES === */
+.footer-skoggy {
+  position: fixed;
+  right: 10%;
+  bottom: 50px;
+  width: 360px; 
+  height: auto; /* Let browser determine height */
+  z-index: 11;
+  transition: transform 0.4s ease-in-out;
+  cursor: pointer;
+}
+.footer-skoggy:hover {
+  transform: scale(1.1) rotate(5deg) translateY(-5px);
+}
+/* ======================================= */
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
