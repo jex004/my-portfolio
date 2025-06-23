@@ -1,155 +1,126 @@
 :root {
-  --pink:  #ecb6a9;
-  --blue:  #9fd7e0;
-  --white: #ffffff;
-  --text-dark: #595959;
-  --text-light-grey: #7f8c8d;
-  --highlight-orange: #e67e22;
-  --border-grey: #e0e0e0;
-  --header-dark: #424242;
-  --bg-light-grey: #f0f2f5; 
+  --pink: #ecb6a9; --blue: #9fd7e0; --white: #ffffff; --text-dark: #595959;
+  --header-dark: #424242; --bg-light-grey: #f0f2f5; 
+  --window-border: #e0e0e0;
+  --transition-speed: 0.3s;
 }
 
-/* RESET & BASE */
+[data-theme="dark"] {
+  --pink: #ecb6a9; --blue: #2c5760; --white: #2a2a2e; --text-dark: #e0e0e0;
+  --header-dark: #3a3a3e; --bg-light-grey: #1e1e1e; --window-border: #444;
+}
+
 * {margin:0;padding:0;box-sizing:border-box}
-body {font-family:'Roboto',sans-serif;color:var(--text-dark);background-color:var(--bg-light-grey);display:flex;flex-direction:column;min-height:100vh; overflow: hidden;}
+body {font-family:'Roboto',sans-serif;color:var(--text-dark);background-color:var(--bg-light-grey);display:flex;flex-direction:column;min-height:100vh; overflow: hidden; transition: background-color var(--transition-speed), color var(--transition-speed);}
 
 /* HEADER */
-header{background:var(--blue);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center; z-index: 100;}
-header .logo{font-family:'Shadows Into Light',cursive;font-size:1.5rem}
+header{
+  background:var(--blue);
+  padding:1rem 2rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center; 
+  position: relative; 
+  z-index: 2; 
+  transition: background-color var(--transition-speed);
+}
 header nav a{margin-left:1.5rem;text-decoration:none;font-weight:500;color:var(--text-dark); cursor: pointer;}
 header nav a:hover{color:var(--white)}
 
-/* MAIN "DESKTOP" AREA */
-main {flex:1;position: relative; padding: 4rem 2rem;}
+.theme-toggle {background: none; border: none; cursor: pointer; padding: 0.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-dark); transition: background-color 0.2s, color 0.2s;}
+.theme-toggle:hover { background-color: rgba(255, 255, 255, 0.2); }
+.theme-toggle svg { width: 24px; height: 24px; }
+.moon-icon { display: none; }
+[data-theme="dark"] .sun-icon { display: none; }
+[data-theme="dark"] .moon-icon { display: block; }
 
-/* DRAGGABLE WINDOW STYLES */
-.window, .hero-window {
-  position: absolute;
-  background: var(--white);
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  border: 1px solid var(--border-grey);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  resize: both;
-}
+main { flex: 1; }
 
-.window.is-active, .hero-window.is-active {
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+/* WINDOW STYLES */
+.window, .home-window {
+  position: absolute; background: var(--white); border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); border: 1px solid var(--window-border);
+  display: flex; flex-direction: column; overflow: hidden;
+  transition: background-color var(--transition-speed), border-color var(--transition-speed);
 }
-
-.hero-window {
-  width: 700px;
-  height: 500px;
-  max-width: 90vw;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.window {
-  width: 500px;
-  height: 350px;
-}
+.window.is-active, .home-window.is-active {box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);}
+.home-window {width: 700px; height: 500px; max-width: 90vw; top: 45%; left: 50%; transform: translate(-50%, -50%); z-index: 5; resize: none;}
+.home-window .window-header { cursor: default; }
+.home-window .close-btn { display: none; }
+.window {width: 800px; height: 600px; max-width: 90vw; max-height: 85vh; resize: both;}
+.window::after {content:'';position:absolute;bottom:0;right:0;width:12px;height:12px;border-bottom:2px solid var(--text-dark);border-right:2px solid var(--text-dark);opacity:0.4;cursor:se-resize;}
 
 .window-header {
-  background-color: var(--header-dark);
-  color: #dcdcdc;
-  padding: .5rem 1rem;
-  font-family: 'Rubik', sans-serif;
-  font-weight: 700;
-  cursor: move;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background-color: var(--header-dark); color: #dcdcdc; padding: .5rem 1rem;
+  font-family: 'Rubik', sans-serif; font-weight: 700; cursor: move;
+  display: flex; justify-content: space-between; align-items: center;
   flex-shrink: 0;
+  transition: background-color var(--transition-speed);
 }
 .window-controls button {width: 14px; height: 14px; border-radius: 50%; border: none; cursor: pointer;}
 .close-btn { background-color: #ff5f57; }
 
 .window-content {
-  padding: 2rem;
-  text-align: center;
-  flex-grow: 1;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 2rem; text-align: center; flex-grow: 1; overflow-y: auto;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
 }
+.window-content.is-document {justify-content:flex-start;align-items:stretch;padding:1.5rem 2rem;}
 
-.avatar {width: 160px;height: 160px;border-radius: 50%;object-fit: cover;border: 4px solid var(--white);box-shadow: 0 2px 8px rgba(0,0,0,0.1);margin-bottom: 1.5rem;}
+.avatar {width: 210px;height: 210px;border-radius: 50%;object-fit: cover;border: 4px solid var(--white);box-shadow: 0 2px 8px rgba(0,0,0,0.1);margin-bottom: 1.5rem;}
 .window-content h1 {font-family: 'Rubik', sans-serif;font-weight: 700;font-size: 2.5rem;color: var(--pink);}
-.window-content .handwritten {font-family: 'Rubik', sans-serif;}
 .window-content .tagline {font-family: 'Rubik', sans-serif;font-weight: 400;color: var(--text-dark);line-height: 1.4;margin-top: 0.5rem;}
 .window-content h2 {font-family: 'Rubik', sans-serif;font-weight: 700;font-size: 2rem;margin-bottom: 1rem;}
-.email-link{display:inline-block;margin-top:1rem;color:var(--highlight-orange);font-weight:bold;text-decoration:none}
+.about-text { max-width: 400px; line-height: 1.6; }
+.email-link{display:inline-block;margin-top:1rem;color:#e67e22;font-weight:bold;text-decoration:none}
 .email-link:hover{text-decoration:underline}
 
-/* === FOOTER WITH DEEP WAVE OVERLAP === */
-footer {
-  position: relative;
-  z-index: 1; /* Sits behind hero card */
-  width: 100%;
-  
-  /* CHANGED: Made footer taller and pulled it up */
-  height: 50vh; /* Takes up half the viewport height. Adjust as you like! */
-  margin-top: -25vh; /* Pulls the footer up by half its new height */
+/* RESUME STYLES */
+.resume {font-family: 'Times New Roman', Times, serif;text-align: left;width: 100%;color: #000;}
+[data-theme="dark"] .resume {color: var(--text-dark);}
+.resume-header {text-align: center;padding: 1rem;margin-bottom: 1rem;background-color: var(--pink);border-radius: 6px;}
+
+/* === THIS IS THE CHANGE === */
+.resume-header h2, .resume-header p {
+  color: #000; /* Force black text for high contrast */
 }
-
-.liquid-fill {position:absolute;bottom:0;left:0;width:200%;height:100%;z-index:1}
-
-.footer-content {
-  position:relative;
-  width:100%;
-  height:100%;
-  z-index:10;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:flex-end; /* Pushes content to the bottom */
-  gap:1.5rem;
-  padding-bottom: 3rem; /* A bit more padding from the bottom edge */
+.resume a {
+  color: #0056b3;
+  text-decoration: none;
 }
+[data-theme="dark"] .resume a {color: var(--blue);}
+/* ======================== */
 
+.resume a:hover {text-decoration: underline;}
+.resume-header h2 {font-size: 2rem;margin-bottom: 0.25rem;font-family: 'Times New Roman', Times, serif;}
+.resume-header p {font-size: 0.9rem;}
+.resume section {margin-bottom: 1.25rem;}
+.resume h3 {font-size: 1.1rem;font-weight: bold;text-transform: uppercase;border-bottom: 1px solid #333;padding-bottom: 0.25rem;margin-bottom: 0.5rem;}
+[data-theme="dark"] .resume h3 {border-bottom-color: #777;}
+.resume .entry {margin-bottom: 1rem;}
+.entry-header {display: flex;justify-content: space-between;align-items: baseline;margin-bottom: 0.25rem;}
+.entry-header h4 {font-size: 1.1rem;font-weight: bold;}
+.entry-header span {font-size: 1rem;font-weight: bold;flex-shrink: 0;margin-left: 1rem;}
+.resume .entry p {margin-bottom: 0.25rem;line-height: 1.5;}
+.resume .entry ul {list-style-position: outside;padding-left: 1.5rem;}
+.resume .entry ul li {margin-bottom: 0.25rem;}
+
+/* FOOTER */
+footer {position: fixed; bottom: 0; left: 0;z-index: 1; width: 100%; height: 400px;}
+.liquid-fill {position:absolute;bottom:0;left:0;width:200%;height:100%;z-index:1; transition: fill var(--transition-speed);}
+.footer-content {position:relative;width:100%;height:100%;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:1.5rem;padding-bottom: 2rem;}
 .icon-row{display:flex;justify-content:center;gap:1rem}
 .icon-link{display:block;width:70px;height:70px;background-repeat:no-repeat;background-position:center;background-size:150%;border-radius:50%;transition:all .3s ease}
 .icon-link:hover{transform:translateY(-3px) scale(1.05)}
 .icon-linkedin{background-image:url(imgs/linkedin-icon.png)}.icon-discord{background-image:url(imgs/discord-icon.png)}.icon-github{background-image:url(imgs/github-icon.png)}.icon-instagram{background-image:url(imgs/instagram-icon.png)}
-
 .copyright-text{font-size:.9rem;font-weight:400;color:var(--white);text-shadow:0 1px 2px rgba(0,0,0,.2)}
+.footer-skoggy {position:absolute;z-index: 11;right: 8%;width: 420px;transition: transform 0.4s ease-in-out;bottom: 50px;}
+.footer-skoggy:hover {transform: scale(1.1) rotate(5deg) translateY(-5px);}
 
-/* Skoggy's position adjusted for the taller footer */
-.footer-skoggy {
-  position: absolute;
-  z-index: 3; /* On top of the hero card */
-  right: 15%;
-  width: 200px;
-  transition: transform 0.4s ease-in-out;
-
-  /* CHANGED: Positions Skoggy on the new, taller wave */
-  bottom: 22vh; /* Adjust this vh value to move up/down */
-}
-.footer-skoggy:hover {
-  transform: scale(1.1) rotate(5deg) translateY(-5px);
-}
-
-/* RESPONSIVE ADJUSTMENTS */
+/* RESPONSIVE */
 @media (max-width: 768px) {
-  main {padding: 2rem 1rem}
-  .hero-window {max-width: 95vw; height: auto; min-height: 400px;}
-  footer {
-    height: 40vh; /* A bit shorter on mobile */
-    margin-top: -20vh;
-  }
-  .footer-content {
-    padding-bottom: 1.5rem;
-  }
-  .footer-skoggy {
-    width: 120px; 
-    right: 5%; 
-    bottom: 15vh;
-  }
+  main {padding: 1rem}
+  .home-window {max-width: 95vw; height: auto; min-height: 400px; top: 40%;}
+  footer {height: 300px;}
+  .footer-content {padding-bottom: 1.5rem;}
+  .footer-skoggy {width: 120px; right: 5%; bottom: 100px;}
 }
