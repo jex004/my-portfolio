@@ -6,15 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
     'beach-sunset.jpg',
     'bunny.jpg',
     'tan-vest-skog.jpg',
-    'friendship-garden.jpg',
+    'friendship-garden.JPG',
     'windy-beach.jpg',
     'fish-fit.jpg',
     'washing-machine-skog.jpg',
-    'cove-sunset.jpg',
-    'vessel.jpeg',
+    'cove-sunset.JPG',
+    'vessel.JPEG',
     'norway.jpg',
     'kimchi-fries.jpg',
-    'freezing-city.jpeg'
+    'freezing-city.JPEG'
   ];
   // ------------------------------------
 
