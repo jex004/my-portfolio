@@ -1,4 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+  // --- Your image filenames go here ---
+  // Just add new image names to this list. They must be inside the 'imgs/gallery/' folder.
+  const galleryImages = [
+    'beach-sunset.jpg',
+    'bunny.jpg',
+    'tan-vest-skog.jpg',
+    'friendship-garden.jpg',
+    'windy-beach.jpg',
+    'fish-fit.jpg',
+    'washing-machine-skog.jpg',
+    'cove-sunset.jpg',
+    'vessel.jpeg',
+    'norway.jpg',
+    'kimchi-fries.jpg',
+    'freezing-city.jpeg'
+  ];
+  // ------------------------------------
+
   const themeToggle = document.getElementById('theme-toggle');
   const html = document.documentElement;
   const savedTheme = localStorage.getItem('theme');
@@ -29,21 +48,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function makeWindowInteractive(element) {
-    let x = 0, y = 0;
-    if (element.classList.contains('home-window') && element.style.transform === '') {
-        const rect = element.getBoundingClientRect();
-        const parentRect = document.body.getBoundingClientRect();
-        element.style.transform = 'none';
-        element.style.left = `${rect.left - parentRect.left}px`;
-        element.style.top = `${rect.top - parentRect.top}px`;
-    }
-    interact(element).draggable({ allowFrom: '.window-header', inertia: true, modifiers: [interact.modifiers.restrictRect({restriction: 'body', endOnly: true})],
+    const rect = element.getBoundingClientRect();
+    element.style.left = `${rect.left}px`;
+    element.style.top = `${rect.top}px`;
+    element.style.transform = '';
+
+    interact(element).draggable({ 
+      allowFrom: '.window-header', 
+      inertia: true, 
+      modifiers: [interact.modifiers.restrictRect({restriction: 'body', endOnly: true})],
       listeners: {
         start: (event) => focusWindow(event.target),
         move(event) {
-          x += event.dx;
-          y += event.dy;
-          event.target.style.transform = `translate(${x}px, ${y}px)`;
+          let left = parseFloat(event.target.style.left) || 0;
+          let top = parseFloat(event.target.style.top) || 0;
+          event.target.style.left = `${left + event.dx}px`;
+          event.target.style.top = `${top + event.dy}px`;
         },
       }
     }).resizable({ edges: { top: false, left: false, bottom: true, right: true },
@@ -65,21 +85,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const windowEl = document.createElement('div');
     windowEl.className = 'window';
-    windowEl.innerHTML = `
-      <div class="window-header"><span>${title}</span><div class="window-controls"><button class="close-btn" aria-label="Close"></button></div></div>
-      <div class="window-content">${contentTemplate.innerHTML}</div>`;
+    windowEl.innerHTML = `<div class="window-header"><span>${title}</span><div class="window-controls"><button class="close-btn" aria-label="Close"></button></div></div><div class="window-content">${contentTemplate.innerHTML}</div>`;
     
     const contentPane = windowEl.querySelector('.window-content');
     
-    // === THIS IS THE FIX ===
-    // If the window is a "document" type (like resume or projects), add the special class.
-    if (id === 'resume' || id === 'projects') {
+    if (id === 'resume' || id === 'projects' || id === 'gallery') {
       contentPane.classList.add('is-document');
     }
+
+    // *** NEW: Populate gallery if it's the gallery window ***
+    if (id === 'gallery') {
+      const grid = windowEl.querySelector('.gallery-grid');
+      grid.innerHTML = ''; // Clear any placeholders
+      for (const imageName of galleryImages) {
+        const img = document.createElement('img');
+        img.src = `imgs/gallery/${imageName}`;
+        img.alt = 'Artwork from gallery';
+        img.className = 'gallery-item';
+        grid.appendChild(img);
+      }
+    }
+
     contentPane.scrollTop = 0;
-    // ========================
       
-    const openCount = Object.keys(openWindows).length;
     const offsetX = Math.random() * 40 - 20;
     const offsetY = Math.random() * 40 - 20;
     windowEl.style.top = `calc(50% + ${offsetY}px)`;
@@ -114,4 +142,42 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  const discordLink = document.getElementById('discord-link');
+  if (discordLink) {
+    discordLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const existingPopup = document.querySelector('.discord-popup');
+      if (existingPopup) {
+        existingPopup.remove();
+        return;
+      }
+      const popup = document.createElement('div');
+      popup.className = 'discord-popup';
+      popup.innerHTML = `<div class="discord-popup-header">Discord</div><div class="discord-username" data-tooltip="Click to copy">hopenot</div>`;
+      document.body.appendChild(popup);
+      const iconRect = discordLink.getBoundingClientRect();
+      popup.style.left = `${iconRect.left + iconRect.width / 2}px`;
+      popup.style.top = `${iconRect.top}px`;
+      const usernameEl = popup.querySelector('.discord-username');
+      usernameEl.addEventListener('click', () => {
+        navigator.clipboard.writeText('hopenot').then(() => {
+          usernameEl.setAttribute('data-tooltip', 'Copied!');
+          setTimeout(() => { usernameEl.setAttribute('data-tooltip', 'Click to copy'); }, 2000);
+        }).catch(err => {
+          console.error('Failed to copy: ', err);
+          usernameEl.setAttribute('data-tooltip', 'Failed to copy!');
+        });
+      });
+      setTimeout(() => {
+        const closePopup = (event) => {
+          if (!popup.contains(event.target) && event.target !== discordLink) {
+            if (document.body.contains(popup)) { popup.remove(); }
+            document.removeEventListener('click', closePopup);
+          }
+        };
+        document.addEventListener('click', closePopup);
+      }, 0);
+    });
+  }
 });

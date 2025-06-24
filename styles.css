@@ -67,6 +67,44 @@ main { flex: 1; }
 [data-theme="dark"] .project-card a {color: var(--pink);}
 .project-card a:hover {text-decoration: underline;}
 .project-links {display: flex;gap: 1.5rem;margin-top: 1rem;}
+
+.gallery-grid {
+  /* Masonry layout using CSS Columns */
+  column-count: 3; /* Number of columns */
+  column-gap: 1rem;
+  width: 100%;
+}
+@media (max-width: 800px) {
+  .gallery-grid { column-count: 2; }
+}
+@media (max-width: 500px) {
+  .gallery-grid { column-count: 1; }
+}
+
+.gallery-item {
+  width: 100%;
+  height: auto; /* Allow images to have their natural height */
+  border-radius: 8px;
+  margin-bottom: 1rem; /* Spacing between rows */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+  display: inline-block; /* Important for masonry */
+  vertical-align: top;
+  border: 2px solid var(--window-border);
+}
+.gallery-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+[data-theme="dark"] .gallery-item {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  border-color: var(--white);
+}
+[data-theme="dark"] .gallery-item:hover {
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+}
+
 .resume {font-family: 'Times New Roman', Times, serif;text-align: left;width: 100%;color: #000;}
 [data-theme="dark"] .resume {color: var(--text-dark);}
 .resume-header {text-align: center;padding: 1rem;margin-bottom: 1rem;background-color: var(--pink);border-radius: 6px;}
@@ -87,15 +125,84 @@ main { flex: 1; }
 .resume .entry ul {list-style-position: outside;padding-left: 1.5rem;}
 .resume .entry ul li {margin-bottom: 0.25rem;}
 
+.discord-popup {
+  position: absolute;
+  background-color: var(--header-dark);
+  color: #dcdcdc;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 100;
+  transform: translate(-50%, -110%); /* Position it above the icon */
+  transition: opacity 0.2s, transform 0.2s;
+}
+.discord-popup-header {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+.discord-username {
+  position: relative; /* Needed for the tooltip */
+  background-color: var(--bg-light-grey);
+  color: var(--text-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  display: block;
+}
+.discord-username::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 110%; /* Position above the username element */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s;
+}
+.discord-username:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
 /* FOOTER */
 footer {position: fixed; bottom: 0; left: 0;z-index: 1; width: 100%; height: 400px;}
 .liquid-fill {position:absolute;bottom:0;left:0;width:200%;height:100%;z-index:1; transition: fill var(--transition-speed);}
 .footer-content {position:relative;width:100%;height:100%;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:1.5rem;padding-bottom: 2rem;}
 .icon-row{display:flex;justify-content:center;gap:1rem}
-.icon-link{display:block;width:70px;height:70px;background-repeat:no-repeat;background-position:center;background-size:150%;border-radius:50%;transition:all .3s ease}
-.icon-link:hover{transform:translateY(-3px) scale(1.05)}
-.icon-linkedin{background-image:url(imgs/linkedin-icon.png)}.icon-discord{background-image:url(imgs/discord-icon.png)}.icon-github{background-image:url(imgs/github-icon.png)}.icon-instagram{background-image:url(imgs/instagram-icon.png)}
-.copyright-text{font-size:.9rem;font-weight:400;color:var(--white);text-shadow:0 1px 2px rgba(0,0,0,.2)}
+.icon-link {
+  display: block;
+  width: 70px;
+  height: 70px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 150%;
+  border-radius: 50%;
+  transition: all .3s ease;
+}
+.icon-link:hover { transform: translateY(-3px) scale(1.05); }
+
+/* This is the part that was broken and is now fixed */
+.icon-linkedin { background-image: url(imgs/linkedin-icon.png); }
+.icon-discord { background-image: url(imgs/discord-icon.png); }
+.icon-github { background-image: url(imgs/github-icon.png); }
+.icon-instagram { background-image: url(imgs/instagram-icon.png); }
+
+.copyright-text {
+  font-size: .9rem;
+  font-weight: 400;
+  color: var(--white);
+  text-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
 
 /* === FINAL, SIMPLIFIED SKOGGY STYLES === */
 .footer-skoggy {
