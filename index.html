@@ -20,7 +20,10 @@
       <a href="#" data-window-id="projects">Projects</a>
       <a href="#" data-window-id="gallery">Gallery</a>
       <a href="#" data-window-id="resume">Resume</a>
-      <a href="#" data-window-id="contact">Contact</a>
+      <a href="#" id="contact-envelope-link" class="contact-icon-link" aria-label="Contact">
+        <img src="imgs/closed_contact.png" alt="Contact" class="contact-icon contact-closed">
+        <img src="imgs/open_contact.png" alt="Contact" class="contact-icon contact-open">
+      </a>
     </nav>
   </header>
 
@@ -74,7 +77,7 @@
           </div>
           <p>A simple app that classifies IT tickets into different categories to help support team members identify how to help customers faster.</p>
           <div class="project-links">
-            <a href="https://github.com/jex004/ticket_classifier" target="_blank" rel="noopener noreferrer">View on Github</a>
+            <a href="https://github.com/jex004/ticket-classifier" target="_blank" rel="noopener noreferrer">View on Github</a>
           </div>
         </div>
         <div class="project-card">
@@ -152,23 +155,6 @@
             <a href="https://github.com/jex004/Recipe-Complexity-Report" target="_blank" rel="noopener noreferrer">View on Github</a>
           </div>
         </div>
-        <!-- <div class="project-card">
-          <div class="entry-header">
-            <h4>Playlette</h4>
-            <span>November 2025-Present</span>
-          </div>
-          <p>A software tool utilizing the Spotify API to generate a custom color palette based on the mood and song attributes of a user-provided Spotify playlist.</p>
-          <div class="project-links">
-            <a href="https://github.com/DevKlim/playlette" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-          </div>
-        </div> -->
-        <!-- <div class="project-card">
-          <div class="entry-header">
-            <h4>Hypixel Murder Mystery Statistics Website</h4>
-            <span>January 2025-Present</span>
-          </div>
-          <p>Developed a Python-based Discord server bot that provides detailed player statistics and enables comparisons for the "Murder Mystery" minigame.</p>
-        </div> -->
         <div class="project-card">
           <div class="entry-header">
             <h4>Simple Movie Search Engine</h4>
@@ -204,19 +190,29 @@
               <span>June 2027</span>
             </div>
             <p><strong>B.S. in Data Science</strong> | GPA: 3.8/4.0</p>
-            <p><em>Relevant Courses:</em> Computer Organization, Data Structures, Foundations of Programming, Algorithms & Analysis, Data Management, Data Visualization, Data Science for Biomedical Applications</p>
+            <p><em>Relevant Courses:</em> Computer Organization, Data Structures, Foundations of Programming, Algorithms & Analysis, Data Management, Data Visualization, Data Science for Biomedical Applications, Theoretical Foundations of Data Science</p>
           </div>
         </section>
         <section>
           <h3>Projects</h3>
           <div class="entry">
             <div class="entry-header">
+              <h4>Smart Ticket Classifier | <a href="https://github.com/jex004/ticket-classifier" target="_blank" rel="noopener noreferrer">github.com/jex004/ticket-classifer</a></h4>
+              <span>June 2025</span>
+            </div>
+            <ul>
+              <li>Developed an AI-powered IT Ticket Assistant using Python, training a Sentence-Transformer deep learning model for topic classification and a custom spaCy model for Named Entity Recognition (NER) to extract key details.</li>
+              <li>Designed and deployed an interactive Streamlit application that intelligently handles unknown ticket types by performing a semantic search against a historical database, enabling data-driven discovery of new service categories.</li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-header">
               <h4>Shinse.AI | <a href="https://shinseai.pages.dev/" target="_blank" rel="noopener noreferrer">shinseai.pages.dev</a></h4>
               <span>June 2025</span>
             </div>
             <ul>
-              <li>Collaborated in a three person team to design and develop an interactive website exploring the use of synthetic audio to train voice cloning models.</li>
-              <li>Investigated the effectiveness of synthetic audio in training voice cloning models by evaluating perceptual realism and speaker similarity.</li>
+              <li>Investigated the effectiveness of synthetic audio and its substitution within mixed training regimes in training voice cloning models by evaluating perceptual realism and speaker similarity using minimal real world data.</li>
+              <li>Engineered a research-driven site that presents technical findings and visualizations on synthetic voice generation using RVC, making complex machine learning insights accessible and understandable to a general audience.</li>
             </ul>
           </div>
           <div class="entry">
@@ -225,8 +221,28 @@
               <span>May 2025</span>
             </div>
             <ul>
-              <li>Co-developed a novel deep learning pipeline to generate expressive, genre- and emotion-conditioned MIDI music from full-text novel chapters.</li>
-              <li>Integrated NLP and symbolic music modeling, enabling dynamic text-to-music synthesis for applications like adaptive audiobooks.</li>
+              <li>Co-developed and implemented a novel deep learning pipeline to generate expressive, genre and emotion conditioned MIDI music from full-text novel chapters using a custom trained Transformer decoder.</li>
+              <li>Integrated NLP and symbolic music modeling by mapping chapter-level emotional content to musical features, enabling dynamic text-to-music synthesis for  adaptive audiobooks, narrative-driven soundtracks, etc.</li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-header">
+              <h4>Treadmill Fitness Visualization | <a href="https://seashello.github.io/dsc106-final-project" target="_blank" rel="noopener noreferrer">seashello.github.io/dsc106-final-project</a></h4>
+              <span>March 2025</span>
+            </div>
+            <ul>
+              <li>Co-developed an interactive, animated simulation platform that models endurance performance across different age and gender groups, revealing how physiological factors like stamina and cardiovascular capacity evolve over time.</li>
+              <li>Integrated real-time data visualizations and dynamic animations to bring complex fitness trends to life.</li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-header">
+              <h4>Recipe Complexity Report | <a href="https://jex004.github.io/Recipe-Complexity-Report/" target="_blank" rel="noopener noreferrer">jex004.github.io/Recipe-Complexity-Report/</a></h4>
+              <span>November 2024</span>
+            </div>
+            <ul>
+              <li>Partnered with a peer to define and quantify recipe complexity, using metrics such as ingredient count, preparation time, and cooking techniques, and correlated these complexity scores with recipe popularity on Food.com by aggregating user engagement data (ratings, review counts) and applying statistical tests to assess significance.</li>
+              <li>Executed a thorough exploratory data analysis, including feature engineering, missing-data diagnostics, and multivariable correlation studies, uncovering key relationships among recipe attributes and user interaction patterns.</li>
             </ul>
           </div>
         </section>
@@ -238,7 +254,8 @@
               <span>June 2025 - August 2025</span>
             </div>
             <ul>
-              <li>Managed front desk operations, including scheduling appointments, processing payments and insurance claims, and coordinating with health insurance providers.</li>
+              <li>Managed front desk operations, including scheduling appointments and processing payments and insurance claims.</li>
+              <li>Evaluated, trained, and monitored new receptionist staff for the establishment until management approval.</li>
             </ul>
           </div>
           <div class="entry">
@@ -247,7 +264,8 @@
               <span>September 2022 - December 2023</span>
             </div>
             <ul>
-              <li>Managed front desk operations, including scheduling, payments, and insurance claims to ensure smooth client experiences.</li>
+              <li>Managed front desk operations, including scheduling appointments and processing payments and insurance claims.</li>
+              <li>Evaluated, trained, and monitored new receptionist staff for the establishment until management approval.</li>
             </ul>
           </div>
         </section>
@@ -260,14 +278,6 @@
         </section>
       </div>
     </div>
-
-    <!-- Contact Window Content -->
-    <div id="contact-content">
-      <h2>Get In Touch</h2>
-      <p>The best way to reach me is by email!</p>
-      <a href="mailto:jenny.xu@example.com" class="email-link">jenny.xu@example.com</a>
-    </div>
-
   </div>
 
   <footer>

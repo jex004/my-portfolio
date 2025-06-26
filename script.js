@@ -180,4 +180,47 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 0);
     });
   }
+
+  const contactEnvelopeLink = document.getElementById('contact-envelope-link');
+  if (contactEnvelopeLink) {
+    contactEnvelopeLink.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      const existingPopup = document.querySelector('.contact-image-popup');
+      if (existingPopup) {
+        existingPopup.remove();
+        return;
+      }
+
+      const popup = document.createElement('div');
+      popup.className = 'contact-image-popup';
+
+      const emailLink = document.createElement('a');
+      emailLink.className = 'contact-popup-email';
+      emailLink.href = 'mailto:jennyxu2012@gmail.com';
+emailLink.textContent = 'jennyxu2012@gmail.com';
+      popup.appendChild(emailLink);
+
+      document.body.appendChild(popup);
+      const iconRect = contactEnvelopeLink.getBoundingClientRect();
+      
+      popup.style.top = `${iconRect.bottom + 15}px`;
+      // Position from the right edge of the window
+      popup.style.right = `${window.innerWidth - iconRect.right}px`;
+      // Adjust slightly to align better if needed
+      popup.style.marginRight = "-50px";
+
+      setTimeout(() => popup.classList.add('is-visible'), 10);
+
+      setTimeout(() => {
+        const closeOnClickAway = (event) => {
+          if (!popup.contains(event.target) && !contactEnvelopeLink.contains(event.target)) {
+            popup.remove();
+            document.removeEventListener('click', closeOnClickAway);
+          }
+        };
+        document.addEventListener('click', closeOnClickAway);
+      }, 0);
+    });
+  }
 });
