@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // --- Your image filenames go here ---
-  // Just add new image names to this list. They must be inside the 'imgs/gallery/' folder.
   const galleryImages = [
     'beach-sunset.jpg',
     'bunny.jpg',
@@ -66,7 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
           event.target.style.top = `${top + event.dy}px`;
         },
       }
-    }).resizable({ edges: { top: false, left: false, bottom: true, right: true },
+    }).resizable({
+      // The new edges configuration:
+      edges: {
+        top: false, left: false, bottom: false, right: false, // Disable all edges
+        bottomRight: '.resize-handle' // ONLY allow resizing via this handle
+      },
       listeners: {
         start: (event) => focusWindow(event.target),
         move(event) { Object.assign(event.target.style, { width: `${event.rect.width}px`, height: `${event.rect.height}px` }); },
@@ -85,7 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const windowEl = document.createElement('div');
     windowEl.className = 'window';
-    windowEl.innerHTML = `<div class="window-header"><span>${title}</span><div class="window-controls"><button class="close-btn" aria-label="Close"></button></div></div><div class="window-content">${contentTemplate.innerHTML}</div>`;
+    // Added the .resize-handle div to the template
+    windowEl.innerHTML = `<div class="window-header"><span>${title}</span><div class="window-controls"><button class="close-btn" aria-label="Close"></button></div></div><div class="window-content">${contentTemplate.innerHTML}</div><div class="resize-handle"></div>`;
     
     const contentPane = windowEl.querySelector('.window-content');
     
@@ -93,10 +98,9 @@ document.addEventListener('DOMContentLoaded', () => {
       contentPane.classList.add('is-document');
     }
 
-    // *** NEW: Populate gallery if it's the gallery window ***
     if (id === 'gallery') {
       const grid = windowEl.querySelector('.gallery-grid');
-      grid.innerHTML = ''; // Clear any placeholders
+      grid.innerHTML = '';
       for (const imageName of galleryImages) {
         const img = document.createElement('img');
         img.src = `imgs/gallery/${imageName}`;
@@ -128,19 +132,20 @@ document.addEventListener('DOMContentLoaded', () => {
     windowEl.addEventListener('mousedown', () => focusWindow(windowEl));
   }
 
-  if (homeWindow) {
-    homeWindow.addEventListener('mousedown', () => focusWindow(homeWindow));
-  }
+  // This is now correctly disabled/removed
+  // if (homeWindow) {
+  //   homeWindow.addEventListener('mousedown', () => focusWindow(homeWindow));
+  // }
 
   navLinks.forEach(link => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      const windowId = link.dataset.windowId;
-      const windowTitle = link.textContent;
-      if (windowId) {
+    if (link.dataset.windowId) {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        const windowId = link.dataset.windowId;
+        const windowTitle = link.textContent;
         createDynamicWindow(windowId, windowTitle);
-      }
-    });
+      });
+    }
   });
 
   const discordLink = document.getElementById('discord-link');
@@ -170,13 +175,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
       setTimeout(() => {
-        const closePopup = (event) => {
+        const closeOnClickAway = (event) => {
           if (!popup.contains(event.target) && event.target !== discordLink) {
             if (document.body.contains(popup)) { popup.remove(); }
-            document.removeEventListener('click', closePopup);
+            document.removeEventListener('click', closeOnClickAway);
           }
         };
-        document.addEventListener('click', closePopup);
+        document.addEventListener('click', closeOnClickAway);
       }, 0);
     });
   }
@@ -198,16 +203,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const emailLink = document.createElement('a');
       emailLink.className = 'contact-popup-email';
       emailLink.href = 'mailto:jennyxu2012@gmail.com';
-emailLink.textContent = 'jennyxu2012@gmail.com';
+      emailLink.textContent = 'jennyxu2012@gmail.com';
       popup.appendChild(emailLink);
 
       document.body.appendChild(popup);
       const iconRect = contactEnvelopeLink.getBoundingClientRect();
       
       popup.style.top = `${iconRect.bottom + 15}px`;
-      // Position from the right edge of the window
       popup.style.right = `${window.innerWidth - iconRect.right}px`;
-      // Adjust slightly to align better if needed
       popup.style.marginRight = "-50px";
 
       setTimeout(() => popup.classList.add('is-visible'), 10);
