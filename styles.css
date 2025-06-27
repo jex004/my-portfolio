@@ -12,33 +12,16 @@
 
 * {margin:0;padding:0;box-sizing:border-box}
 body {font-family:'Roboto',sans-serif;color:var(--text-dark);background-color:var(--bg-light-grey);display:flex;flex-direction:column;min-height:100vh; overflow: hidden; transition: background-color var(--transition-speed), color var(--transition-speed);}
-header{background:var(--blue);padding:0.5rem 2rem;display:flex;justify-content:space-between;align-items:center; position: relative; z-index: 2; transition: background-color var(--transition-speed);}
+header{background:var(--blue);padding:0.5rem 2rem;display:flex;justify-content:space-between;align-items:center; position: relative; z-index: 1001; transition: background-color var(--transition-speed);}
 header nav a{margin-left:1.5rem;text-decoration:none;font-weight:500;color:var(--text-dark); cursor: pointer;}
 header nav a:hover{color:var(--white)}
 
 .theme-toggle {background: none; border: none; cursor: pointer; padding: 0.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-dark); transition: background-color 0.2s, color 0.2s;}
 .theme-toggle:hover { background-color: rgba(255, 255, 255, 0.2); }
-
-/* Set the size for BOTH your icons */
-.theme-icon {
-  height: 50px; /* You can adjust this size if you want */
-  width: auto;
-}
-
-/* By default (in light mode), HIDE the sunny-skog icon */
-.sunny-skog-icon {
-  display: none;
-}
-
-/* When the theme is dark... */
-[data-theme="dark"] .night-skog-icon {
-  /* ...HIDE the night-skog icon */
-  display: none;
-}
-[data-theme="dark"] .sunny-skog-icon {
-  /* ...and SHOW the sunny-skog icon */
-  display: block;
-}
+.theme-icon {height: 50px;width: auto;}
+.sunny-skog-icon {display: none;}
+[data-theme="dark"] .night-skog-icon {display: none;}
+[data-theme="dark"] .sunny-skog-icon {display: block;}
 
 main { flex: 1; }
 
@@ -49,10 +32,26 @@ main { flex: 1; }
   transition: background-color var(--transition-speed), border-color var(--transition-speed);
 }
 .window.is-active, .home-window.is-active {box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);}
-.home-window {width: 700px; height: 500px; max-width: 90vw; top: 45%; left: 50%; transform: translate(-50%, -50%); z-index: 5; resize: none;}
+
+.home-window {
+  width: clamp(350px, 50vw, 700px); 
+  height: clamp(450px, 60vh, 500px); 
+  top: 45%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  z-index: 5; 
+  resize: none;
+}
 .home-window .window-header { cursor: default; }
 .home-window .close-btn { display: none; }
-.window {width: 800px; height: 600px; max-width: 90vw; max-height: 85vh; resize: both;}
+
+.window {
+  width: clamp(400px, 65vw, 900px); 
+  height: clamp(300px, 75vh, 700px);
+  max-width: 95vw; 
+  max-height: 85vh; 
+  resize: both;
+}
 .window::after {content:'';position:absolute;bottom:0;right:0;width:12px;height:12px;border-bottom:2px solid var(--text-dark);border-right:2px solid var(--text-dark);opacity:0.4;cursor:se-resize;}
 
 .window-header {
@@ -68,7 +67,12 @@ main { flex: 1; }
 .window-content {padding: 2rem; text-align: center; flex-grow: 1; overflow-y: auto;display: flex; flex-direction: column; justify-content: center; align-items: center;}
 .window-content.is-document {justify-content:flex-start;align-items:stretch;padding:1.5rem 2rem;}
 .avatar {width: 210px;height: 210px;border-radius: 50%;object-fit: cover;border: 4px solid var(--white);box-shadow: 0 2px 8px rgba(0,0,0,0.1);margin-bottom: 1.5rem;}
-.window-content h1 {font-family: 'Rubik', sans-serif;font-weight: 700;font-size: 2.5rem;color: var(--pink);}
+.window-content h1 {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 2.5rem); 
+  color: var(--pink);
+}
 .window-content .tagline {font-family: 'Rubik', sans-serif;font-weight: 400;color: var(--text-dark);line-height: 1.4;margin-top: 0.5rem;}
 .window-content h2 {font-family: 'Rubik', sans-serif;font-weight: 700;font-size: 2rem;margin-bottom: 1rem;}
 .about-text { max-width: 400px; line-height: 1.6; }
@@ -189,7 +193,6 @@ main { flex: 1; }
   visibility: visible;
 }
 
-/* CONTACT ENVELOPE ICON STYLES */
 .contact-icon-link {
   position: relative;
   display: inline-block;
@@ -221,9 +224,7 @@ main { flex: 1; }
   opacity: 1;
   transform: translate(-50%, -50%) scale(1.6);
 }
-/* END: CONTACT ENVELOPE ICON STYLES */
 
-/* CLICKED CONTACT IMAGE POPUP STYLES */
 .contact-image-popup {
   position: fixed;
   z-index: 100;
@@ -259,17 +260,43 @@ main { flex: 1; }
 [data-theme="dark"] .contact-popup-email {
   color: #d1c4b8;
 }
-/* END: CLICKED CONTACT IMAGE POPUP STYLES */
 
-/* FOOTER */
-footer {position: fixed; bottom: 0; left: 0;z-index: 1; width: 100%; height: 400px;}
+footer {
+  position: fixed; 
+  bottom: 0; 
+  left: 0;
+  z-index: 1; 
+  width: 100%; 
+  height: 350px; 
+  pointer-events: none; 
+}
+
 .liquid-fill {position:absolute;bottom:0;left:0;width:200%;height:100%;z-index:1; transition: fill var(--transition-speed);}
-.footer-content {position:relative;width:100%;height:100%;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:1.5rem;padding-bottom: 2rem;}
-.icon-row{display:flex;justify-content:center;gap:1rem}
+
+.footer-content {
+  position:relative;
+  width:100%;
+  height:100%;
+  z-index:10;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-end;
+  gap:1rem; 
+  padding-bottom: 1.5rem;
+}
+
+.icon-row{
+  display:flex;
+  justify-content:center;
+  gap: 1rem; 
+  pointer-events: auto; 
+}
+
 .icon-link {
   display: block;
-  width: 70px;
-  height: 70px;
+  width: clamp(50px, 5vw, 70px);
+  height: clamp(50px, 5vw, 70px);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 150%;
@@ -281,34 +308,32 @@ footer {position: fixed; bottom: 0; left: 0;z-index: 1; width: 100%; height: 400
 .icon-discord { background-image: url(imgs/discord-icon.png); }
 .icon-github { background-image: url(imgs/github-icon.png); }
 .icon-instagram { background-image: url(imgs/instagram-icon.png); }
+
 .copyright-text {
   font-size: .9rem;
   font-weight: 400;
   color: var(--white);
   text-shadow: 0 1px 2px rgba(0,0,0,.2);
+  pointer-events: auto; 
 }
 
-/* === FINAL, SIMPLIFIED SKOGGY STYLES === */
 .footer-skoggy {
   position: fixed;
-  right: 10%;
-  bottom: 50px;
-  width: 360px; 
+  right: 5vw; 
+  bottom: 80px; 
+  width: clamp(120px, 20vw, 360px); 
   height: auto;
   z-index: 11;
   transition: transform 0.4s ease-in-out;
   cursor: pointer;
+  pointer-events: auto;
 }
 .footer-skoggy:hover {
   transform: scale(1.1) rotate(5deg) translateY(-5px);
 }
-/* ======================================= */
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
-  main {padding: 1rem}
-  .home-window {max-width: 95vw; height: auto; min-height: 400px; top: 40%;}
-  footer {height: 300px;}
-  .footer-content {padding-bottom: 1.5rem;}
-  .footer-skoggy {width: 120px; right: 5%; bottom: 100px;}
+  footer {
+      height: 280px;
+  }
 }

@@ -21,10 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const html = document.documentElement;
   const savedTheme = localStorage.getItem('theme');
 
-  // --- START: CORRECTED THEME LOGIC ---
-
   // On page load, only set the 'dark' attribute if the saved theme is 'dark'.
-  // Otherwise, do nothing and let it default to light mode (no attribute).
   if (savedTheme === 'dark') {
     html.setAttribute('data-theme', 'dark');
   }
@@ -41,8 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('theme', 'dark');
     }
   });
-
-  // --- END: CORRECTED THEME LOGIC ---
   
   const navLinks = document.querySelectorAll('header nav a');
   const homeWindow = document.querySelector('.home-window');
@@ -79,10 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
         },
       }
     }).resizable({
-      // The new edges configuration:
       edges: {
-        top: false, left: false, bottom: false, right: false, // Disable all edges
-        bottomRight: '.resize-handle' // ONLY allow resizing via this handle
+        top: false, left: false, bottom: false, right: false,
+        bottomRight: '.resize-handle'
       },
       listeners: {
         start: (event) => focusWindow(event.target),
@@ -102,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const windowEl = document.createElement('div');
     windowEl.className = 'window';
-    // Added the .resize-handle div to the template
     windowEl.innerHTML = `<div class="window-header"><span>${title}</span><div class="window-controls"><button class="close-btn" aria-label="Close"></button></div></div><div class="window-content">${contentTemplate.innerHTML}</div><div class="resize-handle"></div>`;
     
     const contentPane = windowEl.querySelector('.window-content');
@@ -144,11 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     windowEl.addEventListener('mousedown', () => focusWindow(windowEl));
   }
-
-  // This is now correctly disabled/removed
-  // if (homeWindow) {
-  //   homeWindow.addEventListener('mousedown', () => focusWindow(homeWindow));
-  // }
 
   navLinks.forEach(link => {
     if (link.dataset.windowId) {
