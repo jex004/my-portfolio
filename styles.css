@@ -12,16 +12,33 @@
 
 * {margin:0;padding:0;box-sizing:border-box}
 body {font-family:'Roboto',sans-serif;color:var(--text-dark);background-color:var(--bg-light-grey);display:flex;flex-direction:column;min-height:100vh; overflow: hidden; transition: background-color var(--transition-speed), color var(--transition-speed);}
-header{background:var(--blue);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center; position: relative; z-index: 2; transition: background-color var(--transition-speed);}
+header{background:var(--blue);padding:0.5rem 2rem;display:flex;justify-content:space-between;align-items:center; position: relative; z-index: 2; transition: background-color var(--transition-speed);}
 header nav a{margin-left:1.5rem;text-decoration:none;font-weight:500;color:var(--text-dark); cursor: pointer;}
 header nav a:hover{color:var(--white)}
 
-.theme-toggle {background: none; border: none; cursor: pointer; padding: 0.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-dark); transition: background-color 0.2s, color 0.2s;}
+.theme-toggle {background: none; border: none; cursor: pointer; padding: 0.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-dark); transition: background-color 0.2s, color 0.2s;}
 .theme-toggle:hover { background-color: rgba(255, 255, 255, 0.2); }
-.theme-toggle svg { width: 24px; height: 24px; }
-.moon-icon { display: none; }
-[data-theme="dark"] .sun-icon { display: none; }
-[data-theme="dark"] .moon-icon { display: block; }
+
+/* Set the size for BOTH your icons */
+.theme-icon {
+  height: 50px; /* You can adjust this size if you want */
+  width: auto;
+}
+
+/* By default (in light mode), HIDE the sunny-skog icon */
+.sunny-skog-icon {
+  display: none;
+}
+
+/* When the theme is dark... */
+[data-theme="dark"] .night-skog-icon {
+  /* ...HIDE the night-skog icon */
+  display: none;
+}
+[data-theme="dark"] .sunny-skog-icon {
+  /* ...and SHOW the sunny-skog icon */
+  display: block;
+}
 
 main { flex: 1; }
 

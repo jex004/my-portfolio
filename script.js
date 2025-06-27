@@ -20,16 +20,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = document.getElementById('theme-toggle');
   const html = document.documentElement;
   const savedTheme = localStorage.getItem('theme');
-  if (savedTheme) { html.setAttribute('data-theme', savedTheme); }
+
+  // --- START: CORRECTED THEME LOGIC ---
+
+  // On page load, only set the 'dark' attribute if the saved theme is 'dark'.
+  // Otherwise, do nothing and let it default to light mode (no attribute).
+  if (savedTheme === 'dark') {
+    html.setAttribute('data-theme', 'dark');
+  }
+
   themeToggle.addEventListener('click', () => {
-    if (html.hasAttribute('data-theme')) {
+    // Check if the 'dark' attribute is currently set.
+    if (html.getAttribute('data-theme') === 'dark') {
+      // If it's dark, switch to light: remove the attribute and save 'light'.
       html.removeAttribute('data-theme');
       localStorage.setItem('theme', 'light');
     } else {
+      // If it's light, switch to dark: add the attribute and save 'dark'.
       html.setAttribute('data-theme', 'dark');
       localStorage.setItem('theme', 'dark');
     }
   });
+
+  // --- END: CORRECTED THEME LOGIC ---
   
   const navLinks = document.querySelectorAll('header nav a');
   const homeWindow = document.querySelector('.home-window');
