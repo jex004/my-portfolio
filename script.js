@@ -21,19 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const html = document.documentElement;
   const savedTheme = localStorage.getItem('theme');
 
-  // On page load, only set the 'dark' attribute if the saved theme is 'dark'.
   if (savedTheme === 'dark') {
     html.setAttribute('data-theme', 'dark');
   }
 
   themeToggle.addEventListener('click', () => {
-    // Check if the 'dark' attribute is currently set.
     if (html.getAttribute('data-theme') === 'dark') {
-      // If it's dark, switch to light: remove the attribute and save 'light'.
       html.removeAttribute('data-theme');
       localStorage.setItem('theme', 'light');
     } else {
-      // If it's light, switch to dark: add the attribute and save 'dark'.
       html.setAttribute('data-theme', 'dark');
       localStorage.setItem('theme', 'dark');
     }
@@ -65,13 +61,21 @@ document.addEventListener('DOMContentLoaded', () => {
       inertia: true, 
       modifiers: [interact.modifiers.restrictRect({restriction: 'body', endOnly: true})],
       listeners: {
-        start: (event) => focusWindow(event.target),
+        // --- CHANGE: Added body class on drag start ---
+        start: (event) => {
+          focusWindow(event.target);
+          document.body.classList.add('is-dragging');
+        },
         move(event) {
           let left = parseFloat(event.target.style.left) || 0;
           let top = parseFloat(event.target.style.top) || 0;
           event.target.style.left = `${left + event.dx}px`;
           event.target.style.top = `${top + event.dy}px`;
         },
+        // --- CHANGE: Removed body class on drag end ---
+        end: (event) => {
+          document.body.classList.remove('is-dragging');
+        }
       }
     }).resizable({
       edges: {
@@ -79,8 +83,18 @@ document.addEventListener('DOMContentLoaded', () => {
         bottomRight: '.resize-handle'
       },
       listeners: {
-        start: (event) => focusWindow(event.target),
-        move(event) { Object.assign(event.target.style, { width: `${event.rect.width}px`, height: `${event.rect.height}px` }); },
+        // --- CHANGE: Added body class on resize start ---
+        start: (event) => {
+          focusWindow(event.target);
+          document.body.classList.add('is-dragging');
+        },
+        move(event) { 
+          Object.assign(event.target.style, { width: `${event.rect.width}px`, height: `${event.rect.height}px` }); 
+        },
+        // --- CHANGE: Removed body class on resize end ---
+        end: (event) => {
+          document.body.classList.remove('is-dragging');
+        }
       },
       modifiers: [interact.modifiers.restrictSize({ min: { width: 400, height: 300 } })],
     });

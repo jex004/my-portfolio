@@ -12,7 +12,6 @@
 
 * {margin:0;padding:0;box-sizing:border-box}
 body {font-family:'Roboto',sans-serif;color:var(--text-dark);background-color:var(--bg-light-grey);display:flex;flex-direction:column;min-height:100vh; overflow: hidden; transition: background-color var(--transition-speed), color var(--transition-speed);}
-/* --- CHANGE: Lowered z-index to sit behind windows --- */
 header{background:var(--blue);padding:0.5rem 2rem;display:flex;justify-content:space-between;align-items:center; position: relative; z-index: 4; transition: background-color var(--transition-speed);}
 header nav a{margin-left:1.5rem;text-decoration:none;font-weight:500;color:var(--text-dark); cursor: pointer;}
 header nav a:hover{color:var(--white)}
@@ -331,6 +330,14 @@ footer {
 }
 .footer-skoggy:hover {
   transform: scale(1.1) rotate(5deg) translateY(-5px);
+}
+
+/* --- NEW: Helper class to prevent text selection during drag/resize --- */
+body.is-dragging {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 @media (max-width: 768px) {
