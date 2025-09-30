@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     'vessel.JPEG',
     'norway.jpg',
     'kimchi-fries.jpg',
-    'freezing-city.JPEG'
+    'freezing-city.JPEG',
+    'galentines.jpg'
   ];
   // ------------------------------------
 
