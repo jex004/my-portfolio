@@ -12,9 +12,7 @@
 
   <header>
     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light and dark mode">
-        <!-- This icon is visible in LIGHT mode, to switch TO dark mode -->
         <img src="imgs/sunny-skog.png" alt="Switch to Dark Mode" class="theme-icon night-skog-icon">
-        <!-- This icon is visible in DARK mode, to switch TO light mode -->
         <img src="imgs/night-skog.png" alt="Switch to Light Mode" class="theme-icon sunny-skog-icon">
     </button>
     <nav>
@@ -44,28 +42,64 @@
 
   <div id="window-templates" style="display: none;">
 
-    <!-- About Window Content -->
     <div id="about-content">
-      <h2>About Me</h2>
-      <p class="about-text">Welcome to my portfolio! I'm a passionate creator studying at UCSD, blending art with technology to build beautiful and intuitive digital experiences. When I'm not coding or designing, you can find me illustrating or working on personal projects.</p>
+      <h2 class="about-me">About Me</h2>
+      <p class="about-intro">
+        Welcome! I'm a passionate creator studying at UCSD, blending art with technology to build beautiful and intuitive digital experiences.
+      </p>
+
+      <div class="about-section">
+        <div class="about-subsection">
+          <h3><span class="icon">🎨</span> Design</h3>
+          <p>
+            With a keen eye for aesthetics, I focus on creating user-centric and visually appealing interfaces. My goal is to make every interaction a delight.
+          </p>
+        </div>
+        <div class="about-subsection">
+          <h3><span class="icon">💻</span> Development</h3>
+          <p>
+            I love bringing ideas to life with code. From front-end frameworks to back-end logic, I enjoy the challenge of building robust and efficient applications.
+          </p>
+        </div>
+        <div class="about-subsection">
+          <h3><span class="icon">📊</span> Data Science</h3>
+          <p>
+            I am fascinated by the stories that data can tell. I specialize in extracting insights, building predictive models, and visualizing complex information clearly.
+          </p>
+        </div>
+      </div>
+
+    <div class="about-section">
+        <h3><span class="icon">✨</span> Beyond the Keyboard</h3>
+        <p>
+            When I'm not working, you can find me illustrating, exploring new coffee shops, or working on personal projects. These passions fuel my creativity and give me a fresh perspective on my work.
+        </p>
     </div>
+</div>
     
-    <!-- Gallery Window Content -->
     <div id="gallery-content">
       <h2>Gallery</h2>
       <div class="gallery-grid">
-        <!-- The gallery will be auto-generated here by JavaScript -->
-      </div>
+        </div>
     </div>
 
-    <!-- Projects Window Content -->
     <div id="projects-content">
       <div class="projects-list">
         <h2>Projects</h2>
         <div class="project-card">
           <div class="entry-header">
+            <h4>Game Library (WIP)</h4>
+            <span>July 2025 - Present</span>
+          </div>
+          <p>An online gameroom hosting website that supports a small library of games.</p>
+          <div class="project-links">
+            <a href="https://github.com/jex004/game-lib" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="entry-header">
             <h4>My Portfolio (WIP)</h4>
-            <span>June 2025</span>
+            <span>June 2025 - Present</span>
           </div>
           <p>My own personal portfolio website!</p>
           <div class="project-links">
@@ -140,7 +174,7 @@
             <h4>Exam Stress Visualization</h4>
             <span>February 2025</span>
           </div>
-          <p>Collaborated in a team of four to design an interactive data visualization that enables the comparison of students' stress levels across different exams.</p>
+          <p>Collaborated in a team of four to design an "interactive data visualization that enables the comparison of students' stress levels across different exams.</p>
           <div class="project-links">
             <a href="https://clairelee-ucsd.github.io/dsc106-project3/" target="_blank" rel="noopener noreferrer">View Project</a>
             <a href="https://github.com/clairelee-ucsd/dsc106-project3" target="_blank" rel="noopener noreferrer">View on GitHub</a>
@@ -177,7 +211,6 @@
       </div>
     </div>
 
-    <!-- Resume Window Content -->
     <div id="resume-content">
       <div class="resume">
         <header class="resume-header">

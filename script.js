@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
       inertia: true, 
       modifiers: [interact.modifiers.restrictRect({restriction: 'body', endOnly: true})],
       listeners: {
-        // --- CHANGE: Added body class on drag start ---
         start: (event) => {
           focusWindow(event.target);
           document.body.classList.add('is-dragging');
@@ -73,31 +72,31 @@ document.addEventListener('DOMContentLoaded', () => {
           event.target.style.left = `${left + event.dx}px`;
           event.target.style.top = `${top + event.dy}px`;
         },
-        // --- CHANGE: Removed body class on drag end ---
         end: (event) => {
           document.body.classList.remove('is-dragging');
         }
       }
     }).resizable({
       edges: {
-        top: false, left: false, bottom: false, right: false,
-        bottomRight: '.resize-handle'
+        top: false, left: false, bottom: true, right: true
       },
       listeners: {
-        // --- CHANGE: Added body class on resize start ---
         start: (event) => {
           focusWindow(event.target);
           document.body.classList.add('is-dragging');
         },
-        move(event) { 
-          Object.assign(event.target.style, { width: `${event.rect.width}px`, height: `${event.rect.height}px` }); 
+        move(event) {
+          Object.assign(event.target.style, { 
+            width: `${event.rect.width}px`, 
+            height: `${event.rect.height}px` 
+          });
         },
-        // --- CHANGE: Removed body class on resize end ---
         end: (event) => {
           document.body.classList.remove('is-dragging');
         }
-      },
-      modifiers: [interact.modifiers.restrictSize({ min: { width: 400, height: 300 } })],
+      }
+      // The conflicting 'modifiers' block has been removed.
+      // The CSS with !important now handles the minimum size reliably.
     });
   }
 
@@ -111,11 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const windowEl = document.createElement('div');
     windowEl.className = 'window';
-    windowEl.innerHTML = `<div class="window-header"><span>${title}</span><div class="window-controls"><button class="close-btn" aria-label="Close"></button></div></div><div class="window-content">${contentTemplate.innerHTML}</div><div class="resize-handle"></div>`;
+    windowEl.innerHTML = `<div class="window-header"><span>${title}</span><div class="window-controls"><button class="close-btn" aria-label="Close"></button></div></div><div class="window-content">${contentTemplate.innerHTML}</div>`;
     
     const contentPane = windowEl.querySelector('.window-content');
     
-    if (id === 'resume' || id === 'projects' || id === 'gallery') {
+    if (id === 'resume' || id === 'projects' || id === 'gallery' || id === 'about') {
       contentPane.classList.add('is-document');
     }
 

@@ -34,9 +34,9 @@ main { flex: 1; }
 .window.is-active, .home-window.is-active {box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);}
 
 .home-window {
-  width: clamp(350px, 50vw, 700px); 
-  height: clamp(450px, 60vh, 500px); 
-  top: 45%; 
+  width: clamp(385px, 55vw, 770px); 
+  height: clamp(495px, 66vh, 550px); 
+  top: 48%; 
   left: 50%; 
   transform: translate(-50%, -50%); 
   z-index: 5; 
@@ -51,6 +51,8 @@ main { flex: 1; }
   max-width: 95vw; 
   max-height: 85vh; 
   resize: both;
+  min-width: 400px !important;
+  min-height: 100px !important;
 }
 .window::after {content:'';position:absolute;bottom:0;right:0;width:12px;height:12px;border-bottom:2px solid var(--text-dark);border-right:2px solid var(--text-dark);opacity:0.4;cursor:se-resize;}
 
@@ -76,18 +78,106 @@ main { flex: 1; }
   opacity: 0.7; /* Adds a simple hover effect */
 }
 
-.window-content {padding: 2rem; text-align: center; flex-grow: 1; overflow-y: auto;display: flex; flex-direction: column; justify-content: center; align-items: center;}
-.window-content.is-document {justify-content:flex-start;align-items:stretch;padding:1.5rem 2rem;}
-.avatar {width: 210px;height: 210px;border-radius: 50%;object-fit: cover;border: 4px solid var(--white);box-shadow: 0 2px 8px rgba(0,0,0,0.1);margin-bottom: 1.5rem;}
+.window-content {
+  padding: 2rem;
+  text-align: center;
+  flex-grow: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Changed from 'center' to 'flex-start' */
+  align-items: center;
+}
+
+/* Added this new rule to specifically center the home window's content */
+.home-window .window-content {
+  justify-content: center;
+}
+
+.window-content.is-document {
+  justify-content: flex-start; /* This line is now redundant but leaving it is harmless. For best practice, it can be removed. */
+  align-items: stretch;
+  padding: 3rem 2rem;
+}
+
+.avatar {
+  width: 240px; /* Increased from 210px */
+  height: 240px; /* Increased from 210px */
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--white);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 1.7rem; /* Increased margin for spacing */
+}
+
 .window-content h1 {
   font-family: 'Rubik', sans-serif;
   font-weight: 700;
-  font-size: clamp(2rem, 5vw, 2.5rem); 
+  font-size: clamp(2.3rem, 5.8vw, 2.9rem); /* Increased font size */
   color: var(--pink);
 }
-.window-content .tagline {font-family: 'Rubik', sans-serif;font-weight: 400;color: var(--text-dark);line-height: 1.4;margin-top: 0.5rem;}
+
+.window-content .tagline {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 400;
+  color: var(--text-dark);
+  line-height: 1.4;
+  margin-top: 0.7rem; /* Increased margin for spacing */
+  font-size: 1.15rem; /* Added font-size for clarity and size */
+}
 .window-content h2 {font-family: 'Rubik', sans-serif;font-weight: 700;font-size: 2rem;margin-bottom: 1rem;}
-.about-text { max-width: 400px; line-height: 1.6; }
+
+.about-me {
+  margin-top: 4rem;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--pink);
+}
+
+.about-intro {
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+.about-section {
+  width: 100%;
+  max-width: 650px;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.about-subsection {
+  margin-bottom: 1.5rem;
+}
+
+.about-section h3,
+.about-subsection h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--pink);
+  margin-bottom: 0.5rem;
+}
+
+.about-section h3 .icon,
+.about-subsection h3 .icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.about-section p,
+.about-subsection p {
+  line-height: 1.6;
+  padding-left: 2.35rem; /* Aligns text under the heading title */
+}
+
 .email-link{display:inline-block;margin-top:1rem;color:#e67e22;font-weight:bold;text-decoration:none}
 .email-link:hover{text-decoration:underline}
 .projects-list {width: 100%;height: 100%;text-align: left;}
@@ -283,7 +373,16 @@ footer {
   pointer-events: none; 
 }
 
-.liquid-fill {position:absolute;bottom:0;left:0;width:200%;height:100%;z-index:1; transition: fill var(--transition-speed);}
+.liquid-fill {
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:200%;
+  height:100%;
+  z-index:1; 
+  transition: fill var(--transition-speed);
+  opacity: 0.5;
+}
 
 .footer-content {
   position:relative;
@@ -301,21 +400,25 @@ footer {
 .icon-row{
   display:flex;
   justify-content:center;
-  gap: 1rem; 
-  pointer-events: auto; 
+  gap: 0.8rem; 
+  pointer-events: auto;
 }
 
 .icon-link {
   display: block;
-  width: clamp(50px, 5vw, 70px);
-  height: clamp(50px, 5vw, 70px);
+  width: clamp(40px, 4vw, 56px);
+  height: clamp(40px, 4vw, 56px);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 150%;
   border-radius: 50%;
   transition: all .3s ease;
+  filter: brightness(95%);
 }
-.icon-link:hover { transform: translateY(-3px) scale(1.05); }
+.icon-link:hover { 
+  transform: translateY(-3px) scale(1.05); 
+  filter: brightness(100%); /* Returns to original brightness on hover */
+}
 .icon-linkedin { background-image: url(imgs/linkedin-icon.png); }
 .icon-discord { background-image: url(imgs/discord-icon.png); }
 .icon-github { background-image: url(imgs/github-icon.png); }
@@ -331,8 +434,8 @@ footer {
 
 .footer-skoggy {
   position: fixed;
-  right: 5vw; 
-  bottom: 80px; 
+  right: 180px; 
+  bottom: 85px; 
   width: clamp(120px, 20vw, 360px); 
   height: auto;
   z-index: 11;
@@ -344,7 +447,6 @@ footer {
   transform: scale(1.1) rotate(5deg) translateY(-5px);
 }
 
-/* --- NEW: Helper class to prevent text selection during drag/resize --- */
 body.is-dragging {
   user-select: none;
   -webkit-user-select: none;
