@@ -60,7 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
     interact(element).draggable({ 
       allowFrom: '.window-header', 
       inertia: true, 
-      modifiers: [interact.modifiers.restrictRect({restriction: 'body', endOnly: true})],
+      modifiers: [
+        interact.modifiers.restrictRect({
+          restriction: 'parent'
+        })
+      ],
       listeners: {
         start: (event) => {
           focusWindow(event.target);
@@ -80,6 +84,17 @@ document.addEventListener('DOMContentLoaded', () => {
       edges: {
         top: false, left: false, bottom: true, right: true
       },
+      modifiers: [
+        interact.modifiers.restrictSize({
+          min: { width: 400, height: 100 },
+          max: () => {
+            return {
+              width: window.innerWidth - 10,
+              height: window.innerHeight - 20
+            };
+          }
+        })
+      ],
       listeners: {
         start: (event) => {
           focusWindow(event.target);
@@ -95,16 +110,20 @@ document.addEventListener('DOMContentLoaded', () => {
           document.body.classList.remove('is-dragging');
         }
       }
-      // The conflicting 'modifiers' block has been removed.
-      // The CSS with !important now handles the minimum size reliably.
     });
   }
 
   function createDynamicWindow(id, title) {
+    // --- THIS IS THE NEW LOGIC ---
+    // If the window exists, close it and stop the function.
     if (openWindows[id]) {
-      focusWindow(openWindows[id]);
-      return;
+      const windowToClose = openWindows[id];
+      document.body.removeChild(windowToClose);
+      delete openWindows[id];
+      return; 
     }
+    // ----------------------------
+
     const contentTemplate = document.getElementById(`${id}-content`);
     if (!contentTemplate) return;
 
@@ -114,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const contentPane = windowEl.querySelector('.window-content');
     
-    if (id === 'resume' || id === 'projects' || id === 'gallery' || id === 'about') {
+    if (id === 'resume' || id === 'projects' || id === 'gallery') {
       contentPane.classList.add('is-document');
     }
 

@@ -48,20 +48,21 @@
         Welcome! I'm a passionate creator studying at UCSD, blending art with technology to build beautiful and intuitive digital experiences.
       </p>
 
-      <div class="about-section">
-        <div class="about-subsection">
+      <!-- New Card-based layout for skills -->
+      <div class="skills-container">
+        <div class="skill-card">
           <h3><span class="icon">🎨</span> Design</h3>
           <p>
             With a keen eye for aesthetics, I focus on creating user-centric and visually appealing interfaces. My goal is to make every interaction a delight.
           </p>
         </div>
-        <div class="about-subsection">
+        <div class="skill-card">
           <h3><span class="icon">💻</span> Development</h3>
           <p>
             I love bringing ideas to life with code. From front-end frameworks to back-end logic, I enjoy the challenge of building robust and efficient applications.
           </p>
         </div>
-        <div class="about-subsection">
+        <div class="skill-card">
           <h3><span class="icon">📊</span> Data Science</h3>
           <p>
             I am fascinated by the stories that data can tell. I specialize in extracting insights, building predictive models, and visualizing complex information clearly.
@@ -69,13 +70,23 @@
         </div>
       </div>
 
-    <div class="about-section">
-        <h3><span class="icon">✨</span> Beyond the Keyboard</h3>
-        <p>
+      <!-- New Section for personal info -->
+      <div class="about-extra-section">
+        <div class="extra-content">
+          <h3><span class="icon">✨</span> Beyond the Keyboard</h3>
+          <p>
             When I'm not working, you can find me illustrating, exploring new coffee shops, or working on personal projects. These passions fuel my creativity and give me a fresh perspective on my work.
-        </p>
+            <!-- You could add a list here! -->
+          </p>
+        </div>
+        <div class="extra-visual-placeholder">
+          <!-- You could add an image here, like this: -->
+          <!-- <img src="imgs/your-hobby-photo.jpg" alt="A photo of me drawing"> -->
+          <span>A place for a fun photo or a list of your favorite things!</span>
+        </div>
+      </div>
+
     </div>
-</div>
     
     <div id="gallery-content">
       <h2>Gallery</h2>
@@ -312,7 +323,8 @@
         </section>
       </div>
     </div>
-  </div>
+
+  </div> <!-- This is the FIXED closing tag for #window-templates -->
 
   <footer>
     <svg class="liquid-fill" viewBox="0 0 1000 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
