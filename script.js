@@ -1,3 +1,5 @@
+// START OF FILE script.js
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // --- Image filenames go here ---
@@ -34,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let highestZIndex = 10;
   const openWindows = { 'home': homeWindow }; 
 
-  // --- FUNCTION: Sets up scroll animations ---
   function setupScrollAnimations(container) {
     const elementsToAnimate = container.querySelectorAll('.fade-in-element');
     const observer = new IntersectionObserver((entries) => {
@@ -45,8 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }, {
-      root: container.querySelector('.window-content'), // Observe scrolling inside the window
-      threshold: 0.1 // Trigger when 10% of the element is visible
+      root: container.querySelector('.window-content'),
+      threshold: 0.1
     });
 
     elementsToAnimate.forEach(el => {
@@ -131,6 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
         img.src = `imgs/gallery/${imageName}`;
         img.alt = 'Artwork from gallery';
         img.className = 'gallery-item';
+        // --- THIS IS THE FIX ---
+        img.loading = 'lazy'; 
+        // -----------------------
         grid.appendChild(img);
       }
     }
@@ -149,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
     makeWindowInteractive(windowEl);
     focusWindow(windowEl);
     
-    // Set up animations for both About and Projects windows
     if (id === 'about' || id === 'projects') {
       setupScrollAnimations(windowEl);
     }
