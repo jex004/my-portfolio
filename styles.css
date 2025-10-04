@@ -368,8 +368,12 @@ footer {
   width:200%;
   height:100%;
   z-index:1; 
-  transition: fill var(--transition-speed);
+  transition: fill var(--transition-speed), opacity var(--transition-speed);
   opacity: 0.5;
+}
+
+[data-theme="dark"] .liquid-fill {
+  opacity: 0.2;
 }
 
 .footer-content {
@@ -780,7 +784,7 @@ body.is-dragging {
 /* Adjust project layout now that visuals are gone */
 .project-entry {
   justify-content: center;
-  text-align: center;
+  text-align: left; /* THIS IS THE FIX */
 }
 .project-details {
   max-width: 600px; /* Constrain text width for readability */

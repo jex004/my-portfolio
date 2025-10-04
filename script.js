@@ -1,11 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // --- Your image filenames go here ---
+  // --- Image filenames go here ---
   const galleryImages = [
     'beach-sunset.jpg', 'bunny.jpg', 'tan-vest-skog.jpg',
     'friendship-garden.JPG', 'windy-beach.jpg', 'fish-fit.jpg',
     'washing-machine-skog.jpg', 'cove-sunset.JPG', 'vessel.JPEG',
-    'norway.jpg', 'kimchi-fries.jpg', 'freezing-city.JPEG', 'galentines.jpg'
+    'norway.jpg', 'kimchi-fries.jpg', 'freezing-city.JPEG', 'galentines.jpg',
+    'bday-2023.jpg', 'hello-there.jpg', 'jersey-beach.jpg', 'nyc-heart.jpg',
+    'party-hats.jpg', 'nyc-stairs.jpg', 'frog-skog.jpg'
   ];
   // ------------------------------------
 
