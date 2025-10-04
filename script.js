@@ -2,19 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Your image filenames go here ---
   const galleryImages = [
-    'beach-sunset.jpg',
-    'bunny.jpg',
-    'tan-vest-skog.jpg',
-    'friendship-garden.JPG',
-    'windy-beach.jpg',
-    'fish-fit.jpg',
-    'washing-machine-skog.jpg',
-    'cove-sunset.JPG',
-    'vessel.JPEG',
-    'norway.jpg',
-    'kimchi-fries.jpg',
-    'freezing-city.JPEG',
-    'galentines.jpg'
+    'beach-sunset.jpg', 'bunny.jpg', 'tan-vest-skog.jpg',
+    'friendship-garden.JPG', 'windy-beach.jpg', 'fish-fit.jpg',
+    'washing-machine-skog.jpg', 'cove-sunset.JPG', 'vessel.JPEG',
+    'norway.jpg', 'kimchi-fries.jpg', 'freezing-city.JPEG', 'galentines.jpg'
   ];
   // ------------------------------------
 
@@ -41,6 +32,26 @@ document.addEventListener('DOMContentLoaded', () => {
   let highestZIndex = 10;
   const openWindows = { 'home': homeWindow }; 
 
+  // --- FUNCTION: Sets up scroll animations ---
+  function setupScrollAnimations(container) {
+    const elementsToAnimate = container.querySelectorAll('.fade-in-element');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: container.querySelector('.window-content'), // Observe scrolling inside the window
+      threshold: 0.1 // Trigger when 10% of the element is visible
+    });
+
+    elementsToAnimate.forEach(el => {
+      observer.observe(el);
+    });
+  }
+
   function focusWindow(windowEl) {
     if (!windowEl) return;
     document.querySelectorAll('.window, .home-window').forEach(win => {
@@ -60,69 +71,42 @@ document.addEventListener('DOMContentLoaded', () => {
     interact(element).draggable({ 
       allowFrom: '.window-header', 
       inertia: true, 
-      modifiers: [
-        interact.modifiers.restrictRect({
-          restriction: 'parent'
-        })
-      ],
+      modifiers: [ interact.modifiers.restrictRect({ restriction: 'parent' }) ],
       listeners: {
-        start: (event) => {
-          focusWindow(event.target);
-          document.body.classList.add('is-dragging');
-        },
+        start: (event) => { focusWindow(event.target); document.body.classList.add('is-dragging'); },
         move(event) {
           let left = parseFloat(event.target.style.left) || 0;
           let top = parseFloat(event.target.style.top) || 0;
           event.target.style.left = `${left + event.dx}px`;
           event.target.style.top = `${top + event.dy}px`;
         },
-        end: (event) => {
-          document.body.classList.remove('is-dragging');
-        }
+        end: (event) => { document.body.classList.remove('is-dragging'); }
       }
     }).resizable({
-      edges: {
-        top: false, left: false, bottom: true, right: true
-      },
+      edges: { top: false, left: false, bottom: true, right: true },
       modifiers: [
         interact.modifiers.restrictSize({
           min: { width: 400, height: 100 },
-          max: () => {
-            return {
-              width: window.innerWidth - 10,
-              height: window.innerHeight - 20
-            };
-          }
+          max: () => ({ width: window.innerWidth - 10, height: window.innerHeight - 20 })
         })
       ],
       listeners: {
-        start: (event) => {
-          focusWindow(event.target);
-          document.body.classList.add('is-dragging');
-        },
+        start: (event) => { focusWindow(event.target); document.body.classList.add('is-dragging'); },
         move(event) {
-          Object.assign(event.target.style, { 
-            width: `${event.rect.width}px`, 
-            height: `${event.rect.height}px` 
-          });
+          Object.assign(event.target.style, { width: `${event.rect.width}px`, height: `${event.rect.height}px` });
         },
-        end: (event) => {
-          document.body.classList.remove('is-dragging');
-        }
+        end: (event) => { document.body.classList.remove('is-dragging'); }
       }
     });
   }
 
   function createDynamicWindow(id, title) {
-    // --- THIS IS THE NEW LOGIC ---
-    // If the window exists, close it and stop the function.
     if (openWindows[id]) {
       const windowToClose = openWindows[id];
       document.body.removeChild(windowToClose);
       delete openWindows[id];
       return; 
     }
-    // ----------------------------
 
     const contentTemplate = document.getElementById(`${id}-content`);
     if (!contentTemplate) return;
@@ -162,6 +146,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     makeWindowInteractive(windowEl);
     focusWindow(windowEl);
+    
+    // Set up animations for both About and Projects windows
+    if (id === 'about' || id === 'projects') {
+      setupScrollAnimations(windowEl);
+    }
 
     windowEl.querySelector('.close-btn').addEventListener('click', () => {
       document.body.removeChild(windowEl);
@@ -187,10 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
     discordLink.addEventListener('click', (e) => {
       e.preventDefault();
       const existingPopup = document.querySelector('.discord-popup');
-      if (existingPopup) {
-        existingPopup.remove();
-        return;
-      }
+      if (existingPopup) { existingPopup.remove(); return; }
       const popup = document.createElement('div');
       popup.className = 'discord-popup';
       popup.innerHTML = `<div class="discord-popup-header">Discord</div><div class="discord-username" data-tooltip="Click to copy">hopenot</div>`;
@@ -224,31 +210,21 @@ document.addEventListener('DOMContentLoaded', () => {
   if (contactEnvelopeLink) {
     contactEnvelopeLink.addEventListener('click', (e) => {
       e.preventDefault();
-
       const existingPopup = document.querySelector('.contact-image-popup');
-      if (existingPopup) {
-        existingPopup.remove();
-        return;
-      }
-
+      if (existingPopup) { existingPopup.remove(); return; }
       const popup = document.createElement('div');
       popup.className = 'contact-image-popup';
-
       const emailLink = document.createElement('a');
       emailLink.className = 'contact-popup-email';
       emailLink.href = 'mailto:jennyxu2012@gmail.com';
       emailLink.textContent = 'jennyxu2012@gmail.com';
       popup.appendChild(emailLink);
-
       document.body.appendChild(popup);
       const iconRect = contactEnvelopeLink.getBoundingClientRect();
-      
       popup.style.top = `${iconRect.bottom + 15}px`;
       popup.style.right = `${window.innerWidth - iconRect.right}px`;
       popup.style.marginRight = "-50px";
-
       setTimeout(() => popup.classList.add('is-visible'), 10);
-
       setTimeout(() => {
         const closeOnClickAway = (event) => {
           if (!popup.contains(event.target) && !contactEnvelopeLink.contains(event.target)) {

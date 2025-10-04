@@ -98,12 +98,6 @@ main { flex: 1; }
   padding: 3rem 2rem;
 }
 
-/* This rule was causing the problem and has been removed.
-.window-content.is-about-content {
-  justify-content: center;
-}
-*/
-
 .avatar {
   width: 240px; /* Increased from 210px */
   height: 240px; /* Increased from 210px */
@@ -182,121 +176,8 @@ main { flex: 1; }
   padding-left: 2.35rem; /* Aligns text under the heading title */
 }
 
-/* ======================================== */
-/* === NEW STYLES FOR ABOUT ME SECTION === */
-/* ======================================== */
-
-.skills-container {
-  display: flex;
-  gap: 1.5rem;
-  width: 100%;
-  max-width: 800px; /* Constrain the width for a cleaner look */
-  margin: 2rem 0;
-  flex-wrap: wrap; /* Allows cards to stack on smaller screens */
-}
-
-.skill-card {
-  flex: 1; /* Allows cards to grow and fill space */
-  min-width: 220px; /* Prevents cards from getting too squished */
-  background-color: rgba(0, 0, 0, 0.03);
-  border-radius: 10px;
-  padding: 1.5rem;
-  text-align: left;
-  border: 1px solid var(--window-border);
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-[data-theme="dark"] .skill-card {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.skill-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-}
-[data-theme="dark"] .skill-card:hover {
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-
-.skill-card h3 {
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  margin-bottom: 0.75rem;
-}
-
-.skill-card h3 .icon {
-  font-size: 1.8rem;
-}
-
-.skill-card p {
-  padding-left: 0; /* Override the old padding */
-  line-height: 1.6;
-}
-
-.about-extra-section {
-  display: flex;
-  gap: 2rem;
-  width: 100%;
-  max-width: 800px;
-  margin-top: 2rem;
-  align-items: center;
-}
-
-.extra-content {
-  flex: 2; /* Takes up more space */
-  text-align: left;
-}
-
-.extra-content h3 {
-  margin-bottom: 0.75rem;
-}
-.extra-content p {
-  padding-left: 0;
-}
-
-.extra-visual-placeholder {
-  flex: 1; /* Takes up less space */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border: 2px dashed var(--window-border);
-  border-radius: 10px;
-  padding: 2rem;
-  min-height: 150px;
-  color: var(--text-dark);
-  opacity: 0.7;
-  font-family: 'Rubik', sans-serif;
-}
-
-/* Responsive adjustments for the new sections */
-@media (max-width: 768px) {
-  .about-extra-section {
-    flex-direction: column; /* Stack the columns on smaller screens */
-    text-align: center;
-  }
-  .extra-content, .skill-card {
-     text-align: center;
-  }
-  .skill-card h3 {
-    justify-content: center;
-  }
-}
-
 .email-link{display:inline-block;margin-top:1rem;color:#e67e22;font-weight:bold;text-decoration:none}
 .email-link:hover{text-decoration:underline}
-.projects-list {width: 100%;height: 100%;text-align: left;}
-.projects-list h2 {text-align: center;margin-bottom: 1.5rem;}
-.project-card {background-color: #fafafa;border: 1px solid var(--border-grey);border-radius: 8px;padding: 1.5rem;box-shadow: 2px 2px 5px rgba(0,0,0,0.05);margin-bottom: 1.5rem;}
-[data-theme="dark"] .project-card {background-color: #333;border-color: #555;}
-.project-card h4 {font-family: 'Rubik', sans-serif;font-size: 1.2rem;color: var(--text-dark);margin-bottom: 0.5rem;}
-.project-card p {font-family: 'Roboto', sans-serif;line-height: 1.5;margin-bottom: 1rem;}
-.project-card a {font-weight: bold;color: #0056b3;text-decoration: none;}
-[data-theme="dark"] .project-card a {color: var(--pink);}
-.project-card a:hover {text-decoration: underline;}
-.project-links {display: flex;gap: 1.5rem;margin-top: 1rem;}
 
 .gallery-grid {
   column-count: 3;
@@ -565,4 +446,342 @@ body.is-dragging {
   footer {
       height: 280px;
   }
+}
+
+/* ======================================== */
+/* === NEW CREATIVE ABOUT ME STYLES === */
+/* ======================================== */
+
+.about-me-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem 0 3rem;
+  flex-wrap: wrap;
+}
+
+.about-avatar-container {
+  flex-shrink: 0;
+}
+
+.about-illustration {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid var(--white);
+  box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.about-illustration:hover {
+  transform: scale(1.05) rotate(-3deg);
+}
+
+.about-intro-text {
+  max-width: 500px;
+}
+
+.about-me {
+  margin-top: 0; /* Reset margin */
+  text-align: left;
+}
+.about-intro {
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 4rem;
+}
+
+.skill-note {
+  padding: 1.5rem;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+  text-align: left;
+  transition: all 0.2s ease-in-out;
+}
+
+.skill-note:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 8px 8px 25px rgba(0,0,0,0.15);
+}
+
+.skill-note h3 {
+  font-size: 1.2rem; display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.75rem;
+}
+.skill-note h3 .icon { font-size: 1.8rem; }
+.skill-note p { line-height: 1.6; }
+
+/* Sticky Note Colors & Rotations */
+.sticky-note-1 { background-color: #fffde7; transform: rotate(-2deg); }
+.sticky-note-2 { background-color: #fce4ec; transform: rotate(1.5deg); }
+.sticky-note-3 { background-color: #e3f2fd; transform: rotate(-1deg); }
+
+.sticky-note-1:hover { transform: translateY(-8px) scale(1.02) rotate(-3deg); }
+.sticky-note-2:hover { transform: translateY(-8px) scale(1.02) rotate(2.5deg); }
+.sticky-note-3:hover { transform: translateY(-8px) scale(1.02) rotate(-2deg); }
+
+[data-theme="dark"] .sticky-note-1 { background-color: #4a493a; }
+[data-theme="dark"] .sticky-note-2 { background-color: #4f3b42; }
+[data-theme="dark"] .sticky-note-3 { background-color: #38454f; }
+
+.hobby-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  width: 100%;
+  max-width: 900px;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.hobby-text {
+  max-width: 400px;
+  text-align: left;
+}
+.hobby-text h3 { margin-bottom: 0.75rem; }
+.hobby-text p { line-height: 1.6; }
+
+.polaroid {
+  background: var(--white);
+  padding: 1rem;
+  padding-bottom: 3.5rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  transform: rotate(4deg);
+  transition: transform 0.2s ease-in-out;
+  position: relative;
+}
+
+.polaroid:hover {
+  transform: rotate(2deg) scale(1.05);
+}
+
+.polaroid img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+
+.polaroid figcaption {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  text-align: center;
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 1.3rem;
+  color: #444;
+}
+[data-theme="dark"] .polaroid figcaption { color: #555; }
+[data-theme="dark"] .polaroid { background: #e0e0e0; }
+
+
+/* Animation Styles */
+.fade-in-element {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-element.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .about-me, .about-intro { text-align: center; }
+  .hobby-text { text-align: center; }
+}
+
+/* ======================================== */
+/* === NEW CREATIVE PROJECTS STYLES === */
+/* ======================================== */
+
+/* Remove old card styling */
+.project-card { display: none; }
+
+.projects-list h2 {
+  margin-bottom: 3rem;
+  color: var(--pink);
+}
+
+.project-entry {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+
+/* The magic for the alternating layout */
+.project-entry:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.project-visual {
+  flex-basis: 40%;
+  max-width: 400px;
+  flex-shrink: 0;
+}
+
+.project-visual img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.project-visual img:hover {
+  transform: scale(1.03);
+}
+
+.project-details {
+  flex: 1;
+}
+
+.project-details h4 {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.4rem;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.project-details p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.project-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background-color: var(--bg-light-grey);
+  border: 1px solid var(--window-border);
+  color: var(--text-dark);
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-links a:hover {
+  background-color: var(--window-border);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+[data-theme="dark"] .project-links a {
+  background-color: #3a3a3e;
+  border-color: #444;
+}
+
+[data-theme="dark"] .project-links a:hover {
+  background-color: #444;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.project-links a::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: var(--text-dark);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+/* CORRECTED GITHUB ICON SVG */
+.project-links a[href*="github.com"]::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='currentColor' d='M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='currentColor' d='M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z'/%3E%3C/svg%3E");
+}
+
+/* CORRECTED EXTERNAL LINK ICON SVG */
+.project-links a:not([href*="github.com"])::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z'/%3E%3C/svg%3E");
+}
+
+.project-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.badge {
+  background-color: var(--blue);
+  color: var(--white);
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: transform 0.2s ease;
+}
+.badge:hover {
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .badge {
+  background-color: var(--blue);
+  color: #f0f2f5;
+}
+
+.project-separator {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--window-border), rgba(0, 0, 0, 0));
+  margin: 3rem 0;
+}
+
+/* Responsive adjustments for the new project layout */
+@media (max-width: 768px) {
+  .project-entry,
+  .project-entry:nth-child(even) {
+    flex-direction: column; /* Stack image on top of text */
+    gap: 1.5rem;
+  }
+  .project-visual {
+    max-width: 100%; /* Allow image to be full width */
+  }
+}
+
+/* ======================================== */
+/* === TEMPORARILY HIDE PROJECT VISUALS === */
+/* ======================================== */
+
+.project-visual {
+    display: none;
+}
+
+/* Adjust project layout now that visuals are gone */
+.project-entry {
+  justify-content: center;
+  text-align: center;
+}
+.project-details {
+  max-width: 600px; /* Constrain text width for readability */
 }

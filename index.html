@@ -43,26 +43,44 @@
   <div id="window-templates" style="display: none;">
 
     <div id="about-content">
-      <h2 class="about-me">About Me</h2>
-      <p class="about-intro">
-        Welcome! I'm a passionate creator studying at UCSD, blending art with technology to build beautiful and intuitive digital experiences.
-      </p>
+      <!-- New "Digital Desk" Layout -->
+      <div class="about-me-container">
 
-      <!-- New Card-based layout for skills -->
-      <div class="skills-container">
-        <div class="skill-card">
+        <!-- Main Avatar/Illustration Section -->
+        <div class="about-avatar-container fade-in-element">
+          <!-- 
+            ART OPPORTUNITY #1: 
+            Replace the placeholder with your own illustration! 
+            A drawing of you at your desk would be perfect. 
+            Recommended size: around 400x400px.
+          -->
+          <img src="imgs/main-avatar.jpg" alt="An illustration of Jenny" class="about-illustration" />
+        </div>
+
+        <!-- Introduction Text -->
+        <div class="about-intro-text fade-in-element">
+          <h2 class="about-me">About Me</h2>
+          <p class="about-intro">
+            Welcome! I'm a passionate creator studying at UCSD, blending art with technology to build beautiful and intuitive digital experiences.
+          </p>
+        </div>
+      </div>
+
+      <!-- Skills as Sticky Notes -->
+      <div class="skills-grid">
+        <div class="skill-note sticky-note-1 fade-in-element">
           <h3><span class="icon">🎨</span> Design</h3>
           <p>
             With a keen eye for aesthetics, I focus on creating user-centric and visually appealing interfaces. My goal is to make every interaction a delight.
           </p>
         </div>
-        <div class="skill-card">
+        <div class="skill-note sticky-note-2 fade-in-element">
           <h3><span class="icon">💻</span> Development</h3>
           <p>
             I love bringing ideas to life with code. From front-end frameworks to back-end logic, I enjoy the challenge of building robust and efficient applications.
           </p>
         </div>
-        <div class="skill-card">
+        <div class="skill-note sticky-note-3 fade-in-element">
           <h3><span class="icon">📊</span> Data Science</h3>
           <p>
             I am fascinated by the stories that data can tell. I specialize in extracting insights, building predictive models, and visualizing complex information clearly.
@@ -70,22 +88,26 @@
         </div>
       </div>
 
-      <!-- New Section for personal info -->
-      <div class="about-extra-section">
-        <div class="extra-content">
+      <!-- Hobbies as a Polaroid -->
+      <div class="hobby-zone">
+        <div class="hobby-text fade-in-element">
           <h3><span class="icon">✨</span> Beyond the Keyboard</h3>
           <p>
             When I'm not working, you can find me illustrating, exploring new coffee shops, or working on personal projects. These passions fuel my creativity and give me a fresh perspective on my work.
-            <!-- You could add a list here! -->
           </p>
         </div>
-        <div class="extra-visual-placeholder">
-          <!-- You could add an image here, like this: -->
-          <!-- <img src="imgs/your-hobby-photo.jpg" alt="A photo of me drawing"> -->
-          <span>A place for a fun photo or a list of your favorite things!</span>
+        <div class="hobby-visual fade-in-element">
+          <div class="polaroid">
+            <!-- 
+              ART OPPORTUNITY #2: 
+              Replace this image with a fun photo of you or one of your hobbies.
+              A square-ish photo works best.
+            -->
+            <img src="imgs/gallery/bunny.jpg" alt="A photo of me and my hobbies" />
+            <figcaption>Good times & good vibes.</figcaption>
+          </div>
         </div>
       </div>
-
     </div>
     
     <div id="gallery-content">
@@ -97,128 +119,149 @@
     <div id="projects-content">
       <div class="projects-list">
         <h2>Projects</h2>
-        <div class="project-card">
-          <div class="entry-header">
-            <h4>Game Library (WIP)</h4>
-            <span>July 2025 - Present</span>
-          </div>
-          <p>An online gameroom hosting website that supports a small library of games.</p>
-          <div class="project-links">
-            <a href="https://github.com/jex004/game-lib" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="entry-header">
-            <h4>My Portfolio (WIP)</h4>
-            <span>June 2025 - Present</span>
-          </div>
-          <p>My own personal portfolio website!</p>
-          <div class="project-links">
-            <a href="https://github.com/jex004/my-portfolio" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+
+        <!-- === Game Library (WIP) === -->
+        <div class="project-entry fade-in-element">
+          <div class="project-visual"><img src="imgs/project-placeholder-1.png" alt="Game Library Project Visual"></div>
+          <div class="project-details">
+            <div class="entry-header"><h4>Game Library (WIP)</h4><span>July 2025 - Present</span></div>
+            <p>An online gameroom hosting website that supports a small library of games.</p>
+            <div class="project-links"><a href="https://github.com/jex004/game-lib" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
+            <div class="project-badges"><span class="badge">JavaScript</span><span class="badge">Node.js</span><span class="badge">Socket.IO</span></div>
           </div>
         </div>
-        <div class="project-card">
-          <div class="entry-header">
-            <h4>Smart Ticket Classifier (WIP)</h4>
-            <span>June 2025</span>
-          </div>
-          <p>A simple app that classifies IT tickets into different categories to help support team members identify how to help customers faster.</p>
-          <div class="project-links">
-            <a href="https://github.com/jex004/ticket-classifier" target="_blank" rel="noopener noreferrer">View on Github</a>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="entry-header">
-            <h4>Shinse.AI</h4>
-            <span>June 2025</span>
-          </div>
-          <p>A team project exploring synthetic audio for training voice cloning models, addressing data scarcity and privacy concerns in speech AI.</p>
-          <div class="project-links">
-            <a href="https://shinseai.pages.dev/" target="_blank" rel="noopener noreferrer">View Project</a>
-            <a href="https://github.com/COGS108/Group156-SP25" target="_blank" rel="noopener noreferrer">View on Github</a>
+        <hr class="project-separator">
+
+        <!-- === My Portfolio (WIP) === -->
+        <div class="project-entry fade-in-element">
+          <div class="project-visual"><img src="imgs/project-placeholder-2.png" alt="My Portfolio Project Visual"></div>
+          <div class="project-details">
+            <div class="entry-header"><h4>My Portfolio (WIP)</h4><span>June 2025 - Present</span></div>
+            <p>My own personal portfolio website!</p>
+            <div class="project-links"><a href="https://github.com/jex004/my-portfolio" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
+            <div class="project-badges"><span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">JavaScript</span></div>
           </div>
         </div>
-        <div class="project-card">
-          <div class="entry-header">
-            <h4>ode2net</h4>
-            <span>May 2025</span>
-          </div>
-          <p>Co-developed a deep learning pipeline to generate expressive, emotion-conditioned MIDI music from full-text novel chapters.</p>
-          <div class="project-links">
-            <a href="https://github.com/DevKlim/ode2net" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="entry-header">
-            <h4>beefai</h4>
-            <span>May 2025</span>
-          </div>
-          <p>Helped develop a system where an AI can generate and perform rap verses in real-time for an AI Rap Battle Website.</p>
-          <div class="project-links">
-            <a href="https://github.com/DevKlim/beefai" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        <hr class="project-separator">
+
+        <!-- === Smart Ticket Classifier (WIP) === -->
+        <div class="project-entry fade-in-element">
+          <div class="project-visual"><img src="imgs/project-placeholder-1.png" alt="Smart Ticket Classifier Visual"></div>
+          <div class="project-details">
+            <div class="entry-header"><h4>Smart Ticket Classifier (WIP)</h4><span>June 2025</span></div>
+            <p>A simple app that classifies IT tickets into different categories to help support team members identify how to help customers faster.</p>
+            <div class="project-links"><a href="https://github.com/jex004/ticket-classifier" target="_blank" rel="noopener noreferrer">View on Github</a></div>
+            <div class="project-badges"><span class="badge">Python</span><span class="badge">PyTorch</span><span class="badge">spaCy</span><span class="badge">Streamlit</span></div>
           </div>
         </div>
-        <div class="project-card">
-          <div class="entry-header">
-            <h4>Treadmill Fitness Visualization</h4>
-            <span>March 2025</span>
-          </div>
-          <p>An interactive simulation platform modeling endurance performance across different age and gender groups. Created with a co-developer.</p>
-          <div class="project-links">
-            <a href="https://seashello.github.io/dsc106-final-project" target="_blank" rel="noopener noreferrer">View Project</a>
-            <a href="https://github.com/seashello/dsc106-final-project" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="entry-header">
-            <h4>Bikewatching</h4>
-            <span>February 2025</span>
-          </div>
-          <p>An interactive site displaying a map of the bikeshare system in the Boston/Cambridge area.</p>
-          <div class="project-links">
-            <a href="https://jex004.github.io/bikewatching/" target="_blank" rel="noopener noreferrer">View Project</a>
-            <a href="https://github.com/jex004/bikewatching" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        <hr class="project-separator">
+        
+        <!-- === Shinse.AI === -->
+        <div class="project-entry fade-in-element">
+          <div class="project-visual"><img src="imgs/project-placeholder-2.png" alt="Shinse.AI Project Visual"></div>
+          <div class="project-details">
+            <div class="entry-header"><h4>Shinse.AI</h4><span>June 2025</span></div>
+            <p>A team project exploring synthetic audio for training voice cloning models, addressing data scarcity and privacy concerns in speech AI.</p>
+            <div class="project-links"><a href="https://shinseai.pages.dev/" target="_blank" rel="noopener noreferrer">View Project</a><a href="https://github.com/COGS108/Group156-SP25" target="_blank" rel="noopener noreferrer">View on Github</a></div>
+            <div class="project-badges"><span class="badge">Python</span><span class="badge">Machine Learning</span><span class="badge">RVC</span></div>
           </div>
         </div>
-        <div class="project-card">
-          <div class="entry-header">
-            <h4>Exam Stress Visualization</h4>
-            <span>February 2025</span>
-          </div>
-          <p>Collaborated in a team of four to design an "interactive data visualization that enables the comparison of students' stress levels across different exams.</p>
-          <div class="project-links">
-            <a href="https://clairelee-ucsd.github.io/dsc106-project3/" target="_blank" rel="noopener noreferrer">View Project</a>
-            <a href="https://github.com/clairelee-ucsd/dsc106-project3" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="entry-header">
-            <h4>Recipe Complexity Report</h4>
-            <span>November 2024</span>
-          </div>
-          <p>An analysis of the impact of recipe complexity on popularity, using data from food.com. I explored the dataset, handled missing data, and used feature engineering.</p>
-          <div class="project-links">
-            <a href="https://jex004.github.io/Recipe-Complexity-Report/" target="_blank" rel="noopener noreferrer">View Project</a>
-            <a href="https://github.com/jex004/Recipe-Complexity-Report" target="_blank" rel="noopener noreferrer">View on Github</a>
+        <hr class="project-separator">
+        
+        <!-- === ode2net === -->
+        <div class="project-entry fade-in-element">
+          <div class="project-visual"><img src="imgs/project-placeholder-1.png" alt="ode2net Project Visual"></div>
+          <div class="project-details">
+            <div class="entry-header"><h4>ode2net</h4><span>May 2025</span></div>
+            <p>Co-developed a deep learning pipeline to generate expressive, emotion-conditioned MIDI music from full-text novel chapters.</p>
+            <div class="project-links"><a href="https://github.com/DevKlim/ode2net" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
+            <div class="project-badges"><span class="badge">Python</span><span class="badge">Deep Learning</span><span class="badge">NLP</span></div>
           </div>
         </div>
-        <div class="project-card">
-          <div class="entry-header">
-            <h4>Simple Movie Search Engine</h4>
-            <span>May 2024</span>
-          </div>
-          <p>Created a simple movie search engine using a BST for the DSC30 class at UCSD.</p>
-          <div class="project-links">
-            <a href="https://github.com/jex004/simple-movie-search-engine" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        <hr class="project-separator">
+
+        <!-- === beefai === -->
+        <div class="project-entry fade-in-element">
+          <div class="project-visual"><img src="imgs/project-placeholder-2.png" alt="beefai Project Visual"></div>
+          <div class="project-details">
+            <div class="entry-header"><h4>beefai</h4><span>May 2025</span></div>
+            <p>Helped develop a system where an AI can generate and perform rap verses in real-time for an AI Rap Battle Website.</p>
+            <div class="project-links"><a href="https://github.com/DevKlim/beefai" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
+            <div class="project-badges"><span class="badge">Python</span><span class="badge">AI</span><span class="badge">Real-time</span></div>
           </div>
         </div>
-        <div class="project-card">
-          <div class="entry-header">
-            <h4>Loan Applications Project</h4>
-            <span>March 2024</span>
+        <hr class="project-separator">
+
+        <!-- === Treadmill Fitness Visualization === -->
+        <div class="project-entry fade-in-element">
+          <div class="project-visual"><img src="imgs/project-placeholder-1.png" alt="Treadmill Fitness Visualization Visual"></div>
+          <div class="project-details">
+            <div class="entry-header"><h4>Treadmill Fitness Visualization</h4><span>March 2025</span></div>
+            <p>An interactive simulation platform modeling endurance performance across different age and gender groups. Created with a co-developer.</p>
+            <div class="project-links"><a href="https://seashello.github.io/dsc106-final-project" target="_blank" rel="noopener noreferrer">View Project</a><a href="https://github.com/seashello/dsc106-final-project" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
+            <div class="project-badges"><span class="badge">JavaScript</span><span class="badge">Data Viz</span></div>
           </div>
-          <p>Analyzed a dataset of loan applicant data to assess eligibility based on factors such as debt-to-income ratio, FICO scores, and home ownership.</p>
         </div>
+        <hr class="project-separator">
+        
+        <!-- === Bikewatching === -->
+        <div class="project-entry fade-in-element">
+          <div class="project-visual"><img src="imgs/project-placeholder-2.png" alt="Bikewatching Project Visual"></div>
+          <div class="project-details">
+            <div class="entry-header"><h4>Bikewatching</h4><span>February 2025</span></div>
+            <p>An interactive site displaying a map of the bikeshare system in the Boston/Cambridge area.</p>
+            <div class="project-links"><a href="https://jex004.github.io/bikewatching/" target="_blank" rel="noopener noreferrer">View Project</a><a href="https://github.com/jex004/bikewatching" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
+            <div class="project-badges"><span class="badge">JavaScript</span><span class="badge">HTML</span><span class="badge">Maps API</span></div>
+          </div>
+        </div>
+        <hr class="project-separator">
+        
+        <!-- === Exam Stress Visualization === -->
+        <div class="project-entry fade-in-element">
+          <div class="project-visual"><img src="imgs/project-placeholder-1.png" alt="Exam Stress Visualization Visual"></div>
+          <div class="project-details">
+            <div class="entry-header"><h4>Exam Stress Visualization</h4><span>February 2025</span></div>
+            <p>Collaborated in a team of four to design an "interactive data visualization that enables the comparison of students' stress levels across different exams.</p>
+            <div class="project-links"><a href="https://clairelee-ucsd.github.io/dsc106-project3/" target="_blank" rel="noopener noreferrer">View Project</a><a href="https://github.com/clairelee-ucsd/dsc106-project3" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
+            <div class="project-badges"><span class="badge">Data Viz</span><span class="badge">JavaScript</span></div>
+          </div>
+        </div>
+        <hr class="project-separator">
+        
+        <!-- === Recipe Complexity Report === -->
+        <div class="project-entry fade-in-element">
+          <div class="project-visual"><img src="imgs/project-placeholder-2.png" alt="Recipe Complexity Report Visual"></div>
+          <div class="project-details">
+            <div class="entry-header"><h4>Recipe Complexity Report</h4><span>November 2024</span></div>
+            <p>An analysis of the impact of recipe complexity on popularity, using data from food.com. I explored the dataset, handled missing data, and used feature engineering.</p>
+            <div class="project-links"><a href="https://jex004.github.io/Recipe-Complexity-Report/" target="_blank" rel="noopener noreferrer">View Project</a><a href="https://github.com/jex004/Recipe-Complexity-Report" target="_blank" rel="noopener noreferrer">View on Github</a></div>
+            <div class="project-badges"><span class="badge">Python</span><span class="badge">Data Analysis</span><span class="badge">Pandas</span></div>
+          </div>
+        </div>
+        <hr class="project-separator">
+        
+        <!-- === Simple Movie Search Engine === -->
+        <div class="project-entry fade-in-element">
+          <div class="project-visual"><img src="imgs/project-placeholder-1.png" alt="Simple Movie Search Engine Visual"></div>
+          <div class="project-details">
+            <div class="entry-header"><h4>Simple Movie Search Engine</h4><span>May 2024</span></div>
+            <p>Created a simple movie search engine using a BST for the DSC30 class at UCSD.</p>
+            <div class="project-links"><a href="https://github.com/jex004/simple-movie-search-engine" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
+            <div class="project-badges"><span class="badge">Python</span><span class="badge">Data Structures</span></div>
+          </div>
+        </div>
+        <hr class="project-separator">
+
+        <!-- === Loan Applications Project === -->
+        <div class="project-entry fade-in-element">
+          <div class="project-visual"><img src="imgs/project-placeholder-2.png" alt="Loan Applications Project Visual"></div>
+          <div class="project-details">
+            <div class="entry-header"><h4>Loan Applications Project</h4><span>March 2024</span></div>
+            <p>Analyzed a dataset of loan applicant data to assess eligibility based on factors such as debt-to-income ratio, FICO scores, and home ownership.</p>
+            <div class="project-badges"><span class="badge">Data Analysis</span></div>
+          </div>
+        </div>
+        
       </div>
     </div>
 
