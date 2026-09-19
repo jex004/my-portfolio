@@ -1,244 +1,268 @@
-// START OF FILE script.js
-
 document.addEventListener('DOMContentLoaded', () => {
-
-  // --- Image filenames go here ---
+  const galleryCaptions = {
+    "bday-2023.JPG": "19th",
+    "beach-day.JPG": "Beach day",
+    "cove-sunset.JPG": "Sunset at the cove",
+    "freezing-city.JPEG": "Just NYC",
+    "frog-skog.jpg": "Froggy Skoggy",
+    "hello-there.jpg": "Hello there",
+    "interns.jpeg": "Happy Hour!",
+    "jersey-beach.jpg": "By the ocean",
+    "nyc-stairs.jpg": "SoHo",
+    "nyse.jpeg": "NYSE!",
+    "restaurant.jpg": "Carmine's - Upper West Side",
+    "tan-vest-skog.jpg": "Skoggy's new outfit",
+    "vessel.JPEG": "Holiday at the Vessel",
+    "washing-machine-skog.jpg": "Bath time for Skoggy"
+};
   const galleryImages = [
-    'beach-sunset.jpg', 'bunny.jpg', 'tan-vest-skog.jpg',
-    'friendship-garden.JPG', 'windy-beach.jpg', 'fish-fit.jpg',
-    'washing-machine-skog.jpg', 'cove-sunset.JPG', 'vessel.JPEG',
-    'norway.jpg', 'kimchi-fries.jpg', 'freezing-city.JPEG', 'galentines.jpg',
-    'bday-2023.jpg', 'hello-there.jpg', 'jersey-beach.jpg', 'nyc-heart.jpg',
-    'party-hats.jpg', 'nyc-stairs.jpg', 'frog-skog.jpg'
-  ];
-  // ------------------------------------
-
-  const themeToggle = document.getElementById('theme-toggle');
+    "bday-2023.JPG",
+    "beach-day.JPG",
+    "cove-sunset.JPG",
+    "freezing-city.JPEG",
+    "frog-skog.jpg",
+    "hello-there.jpg",
+    "interns.jpeg",
+    "jersey-beach.jpg",
+    "nyc-stairs.jpg",
+    "nyse.jpeg",
+    "restaurant.jpg",
+    "tan-vest-skog.jpg",
+    "vessel.JPEG",
+    "washing-machine-skog.jpg"
+];
   const html = document.documentElement;
-  const savedTheme = localStorage.getItem('theme');
-
-  if (savedTheme === 'dark') {
-    html.setAttribute('data-theme', 'dark');
+  const themeToggle = document.getElementById('theme-toggle');
+  function setTheme(theme) {
+    html.dataset.theme = theme;
+    themeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
+    themeToggle.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+    themeToggle.firstElementChild.textContent = theme === 'dark' ? '☼' : '☾';
   }
-
+  let savedTheme;
+  try { savedTheme = localStorage.getItem('theme'); } catch { /* Storage may be disabled. */ }
+  setTheme(savedTheme === 'dark' ? 'dark' : 'light');
   themeToggle.addEventListener('click', () => {
-    if (html.getAttribute('data-theme') === 'dark') {
-      html.removeAttribute('data-theme');
-      localStorage.setItem('theme', 'light');
-    } else {
-      html.setAttribute('data-theme', 'dark');
-      localStorage.setItem('theme', 'dark');
-    }
+    const theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
+    setTheme(theme);
+    try { localStorage.setItem('theme', theme); } catch { /* The toggle still works without storage. */ }
   });
-  
-  const navLinks = document.querySelectorAll('header nav a');
-  const homeWindow = document.querySelector('.home-window');
-  let highestZIndex = 10;
-  const openWindows = { 'home': homeWindow }; 
 
-  function setupScrollAnimations(container) {
-    const elementsToAnimate = container.querySelectorAll('.fade-in-element');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      root: container.querySelector('.window-content'),
-      threshold: 0.1
+  const dialog = document.getElementById('content-dialog');
+  const pane = dialog.querySelector('.window-content');
+  const photoDialog = document.getElementById('photo-dialog');
+  const slides = window.moodysSlides;
+  const slideFeature = document.getElementById('internship');
+  const slidePreview = document.getElementById('slide-preview');
+  const pagination = document.getElementById('slide-pagination');
+  let slideIndex = 0;
+  function showSlide(index) {
+    slideIndex = Math.max(0, Math.min(slides.length - 1, index));
+    const slide = slides[slideIndex];
+    const image = document.getElementById('slide-image');
+    image.src = slide.image;
+    image.alt = `${slide.title}. ${slide.summary}`;
+    document.getElementById('flipbook-link').hidden = slideIndex !== 4;
+    document.getElementById('slide-title').textContent = slide.title;
+    document.getElementById('slide-summary').textContent = slide.summary;
+    document.getElementById('slide-position').textContent = `Slide ${slideIndex + 1} of ${slides.length}: ${slide.title}`;
+    pagination.querySelectorAll('button').forEach((button, position) => {
+      if (position === slideIndex) button.setAttribute('aria-current', 'true');
+      else button.removeAttribute('aria-current');
     });
-
-    elementsToAnimate.forEach(el => {
-      observer.observe(el);
-    });
-  }
-
-  function focusWindow(windowEl) {
-    if (!windowEl) return;
-    document.querySelectorAll('.window, .home-window').forEach(win => {
-      win.classList.remove('is-active');
-    });
-    windowEl.classList.add('is-active');
-    highestZIndex++;
-    windowEl.style.zIndex = highestZIndex;
-  }
-
-  function makeWindowInteractive(element) {
-    const rect = element.getBoundingClientRect();
-    element.style.left = `${rect.left}px`;
-    element.style.top = `${rect.top}px`;
-    element.style.transform = '';
-
-    interact(element).draggable({ 
-      allowFrom: '.window-header', 
-      inertia: true, 
-      modifiers: [ interact.modifiers.restrictRect({ restriction: 'parent' }) ],
-      listeners: {
-        start: (event) => { focusWindow(event.target); document.body.classList.add('is-dragging'); },
-        move(event) {
-          let left = parseFloat(event.target.style.left) || 0;
-          let top = parseFloat(event.target.style.top) || 0;
-          event.target.style.left = `${left + event.dx}px`;
-          event.target.style.top = `${top + event.dy}px`;
-        },
-        end: (event) => { document.body.classList.remove('is-dragging'); }
-      }
-    }).resizable({
-      edges: { top: false, left: false, bottom: true, right: true },
-      modifiers: [
-        interact.modifiers.restrictSize({
-          min: { width: 400, height: 100 },
-          max: () => ({ width: window.innerWidth - 10, height: window.innerHeight - 20 })
-        })
-      ],
-      listeners: {
-        start: (event) => { focusWindow(event.target); document.body.classList.add('is-dragging'); },
-        move(event) {
-          Object.assign(event.target.style, { width: `${event.rect.width}px`, height: `${event.rect.height}px` });
-        },
-        end: (event) => { document.body.classList.remove('is-dragging'); }
-      }
+    document.querySelectorAll('[data-slide-step]').forEach(button => {
+      button.disabled = Number(button.dataset.slideStep) < 0 ? slideIndex === 0 : slideIndex === slides.length - 1;
     });
   }
-
-  function createDynamicWindow(id, title) {
-    if (openWindows[id]) {
-      const windowToClose = openWindows[id];
-      document.body.removeChild(windowToClose);
-      delete openWindows[id];
-      return; 
+  slides.forEach((slide, index) => {
+    const button = document.createElement('button');
+    button.textContent = String(index + 1).padStart(2, '0');
+    button.setAttribute('aria-label', `Slide ${index + 1}: ${slide.title}`);
+    button.addEventListener('click', () => showSlide(index));
+    pagination.append(button);
+  });
+  document.querySelectorAll('[data-slide-step]').forEach(button => {
+    button.addEventListener('click', () => showSlide(slideIndex + Number(button.dataset.slideStep)));
+  });
+  slideFeature.addEventListener('keydown', event => {
+    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+    const target = { ArrowLeft: slideIndex - 1, ArrowRight: slideIndex + 1, Home: 0, End: slides.length - 1 }[event.key];
+    if (target !== undefined) { event.preventDefault(); showSlide(target); }
+  });
+  let pointerStart;
+  slidePreview.addEventListener('pointerdown', event => {
+    if (event.pointerType === 'mouse') return;
+    pointerStart = { x: event.clientX, y: event.clientY };
+  });
+  slidePreview.addEventListener('pointercancel', () => { pointerStart = null; });
+  slidePreview.addEventListener('pointerup', event => {
+    if (!pointerStart) return;
+    const dx = event.clientX - pointerStart.x;
+    const dy = event.clientY - pointerStart.y;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      showSlide(slideIndex + (dx < 0 ? 1 : -1));
     }
-
-    const contentTemplate = document.getElementById(`${id}-content`);
-    if (!contentTemplate) return;
-
-    const windowEl = document.createElement('div');
-    windowEl.className = 'window';
-    windowEl.innerHTML = `<div class="window-header"><span>${title}</span><div class="window-controls"><button class="close-btn" aria-label="Close"></button></div></div><div class="window-content">${contentTemplate.innerHTML}</div>`;
-    
-    const contentPane = windowEl.querySelector('.window-content');
-    
-    if (id === 'resume' || id === 'projects' || id === 'gallery') {
-      contentPane.classList.add('is-document');
-    }
-
-    if (id === 'gallery') {
-      const grid = windowEl.querySelector('.gallery-grid');
-      grid.innerHTML = '';
-      for (const imageName of galleryImages) {
-        const img = document.createElement('img');
-        img.src = `imgs/gallery/${imageName}`;
-        img.alt = 'Artwork from gallery';
-        img.className = 'gallery-item';
-        // --- THIS IS THE FIX ---
-        img.loading = 'lazy'; 
-        // -----------------------
-        grid.appendChild(img);
-      }
-    }
-
-    contentPane.scrollTop = 0;
-      
-    const offsetX = Math.random() * 40 - 20;
-    const offsetY = Math.random() * 40 - 20;
-    windowEl.style.top = `calc(50% + ${offsetY}px)`;
-    windowEl.style.left = `calc(50% + ${offsetX}px)`;
-    windowEl.style.transform = 'translate(-50%, -50%)';
-    
-    document.body.appendChild(windowEl);
-    openWindows[id] = windowEl;
-    
-    makeWindowInteractive(windowEl);
-    focusWindow(windowEl);
-    
-    if (id === 'about' || id === 'projects') {
-      setupScrollAnimations(windowEl);
-    }
-
-    windowEl.querySelector('.close-btn').addEventListener('click', () => {
-      document.body.removeChild(windowEl);
-      delete openWindows[id];
+    pointerStart = null;
+  });
+  showSlide(0);
+  document.querySelectorAll('[data-photo-src]').forEach(button => {
+    button.addEventListener('click', () => {
+      const fullPhoto = photoDialog.querySelector('img');
+      fullPhoto.src = button.dataset.photoSrc;
+      fullPhoto.alt = document.querySelector('.receipt-photo img').alt;
+      photoDialog.querySelector('p').textContent = 'Receiptify / September 2026';
+      photoDialog.classList.add('receipt-view');
+      photoDialog.showModal();
     });
-
-    windowEl.addEventListener('mousedown', () => focusWindow(windowEl));
+  });
+  photoDialog.addEventListener('close', () => photoDialog.classList.remove('receipt-view'));
+  const album = [
+    {
+        "file": "norway.jpg",
+        "caption": "Norway",
+        "alt": "A snowy street in Norway"
+    },
+    {
+        "file": "bc-canada.jpeg",
+        "caption": "British Columbia",
+        "alt": "Jenny on a boat in British Columbia"
+    },
+    {
+        "file": "china.jpg",
+        "caption": "China",
+        "alt": "Jenny beside a carved doorway in China"
+    },
+    {
+        "file": "dc-garden.jpg",
+        "caption": "Washington, DC",
+        "alt": "Jenny in a garden in Washington, DC"
+    },
+    {
+        "file": "iceland.jpg",
+        "caption": "Iceland",
+        "alt": "Jenny by the rocky coast in Iceland"
+    },
+    {
+        "file": "japan.jpeg",
+        "caption": "Japan",
+        "alt": "Jenny at a fountain in Japan"
+    }
+];
+  let albumIndex = 0;
+  const albumImage = document.getElementById('album-image');
+  const albumButton = document.getElementById('album-photo');
+  function turnAlbum(direction) {
+    albumIndex = (albumIndex + direction + album.length) % album.length;
+    const photo = album[albumIndex];
+    albumImage.src = `imgs/gallery/${photo.file}`;
+    albumImage.alt = photo.alt;
+    document.getElementById('album-caption').textContent = photo.caption;
+    document.getElementById('album-position').textContent = `${String(albumIndex + 1).padStart(2, '0')} / ${String(album.length).padStart(2, '0')}`;
+    albumButton.setAttribute('aria-label', `Enlarge photo: ${photo.caption}`);
   }
+  document.getElementById('album-prev').addEventListener('click', () => turnAlbum(-1));
+  document.getElementById('album-next').addEventListener('click', () => turnAlbum(1));
+  albumButton.addEventListener('click', () => {
+    const photo = album[albumIndex];
+    const fullPhoto = photoDialog.querySelector('img');
+    fullPhoto.src = albumImage.src;
+    fullPhoto.alt = photo.alt;
+    photoDialog.querySelector('p').textContent = photo.caption;
+    photoDialog.showModal();
+  });
+  const titles = { about: 'About Jenny', projects: 'Project archive', gallery: 'Camera roll', resume: 'Jenny Xu / Résumé' };
 
-  navLinks.forEach(link => {
-    if (link.dataset.windowId) {
-      link.addEventListener('click', (event) => {
-        event.preventDefault();
-        const windowId = link.dataset.windowId;
-        const windowTitle = link.textContent;
-        createDynamicWindow(windowId, windowTitle);
-      });
+  // Close only the top window when the photo viewer is above the gallery.
+  document.addEventListener('keydown', event => {
+    if (event.key !== 'Escape') return;
+    const activeDialog = photoDialog.open ? photoDialog : dialog.open ? dialog : null;
+    if (activeDialog) {
+      event.preventDefault();
+      activeDialog.close();
     }
   });
 
-  const discordLink = document.getElementById('discord-link');
-  if (discordLink) {
-    discordLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      const existingPopup = document.querySelector('.discord-popup');
-      if (existingPopup) { existingPopup.remove(); return; }
-      const popup = document.createElement('div');
-      popup.className = 'discord-popup';
-      popup.innerHTML = `<div class="discord-popup-header">Discord</div><div class="discord-username" data-tooltip="Click to copy">hopenot</div>`;
-      document.body.appendChild(popup);
-      const iconRect = discordLink.getBoundingClientRect();
-      popup.style.left = `${iconRect.left + iconRect.width / 2}px`;
-      popup.style.top = `${iconRect.top}px`;
-      const usernameEl = popup.querySelector('.discord-username');
-      usernameEl.addEventListener('click', () => {
-        navigator.clipboard.writeText('hopenot').then(() => {
-          usernameEl.setAttribute('data-tooltip', 'Copied!');
-          setTimeout(() => { usernameEl.setAttribute('data-tooltip', 'Click to copy'); }, 2000);
-        }).catch(err => {
-          console.error('Failed to copy: ', err);
-          usernameEl.setAttribute('data-tooltip', 'Failed to copy!');
-        });
+  function buildGallery() {
+    const grid = pane.querySelector('.gallery-grid');
+    galleryImages.forEach(name => {
+      const caption = galleryCaptions[name] ?? name.replace(/\.[^.]+$/, '').replaceAll('-', ' ');
+      const button = document.createElement('button');
+      button.className = 'gallery-photo';
+      button.setAttribute('aria-label', `View photo: ${caption}`);
+      const img = document.createElement('img');
+      img.src = `imgs/gallery/${name}`;
+      img.alt = caption;
+      img.loading = 'lazy';
+      const label = document.createElement('span');
+      label.textContent = caption;
+      button.append(img, label);
+      button.addEventListener('click', () => {
+        const fullPhoto = photoDialog.querySelector('img');
+        fullPhoto.src = img.src;
+        fullPhoto.alt = caption;
+        photoDialog.querySelector('p').textContent = caption;
+        photoDialog.showModal();
       });
-      setTimeout(() => {
-        const closeOnClickAway = (event) => {
-          if (!popup.contains(event.target) && event.target !== discordLink) {
-            if (document.body.contains(popup)) { popup.remove(); }
-            document.removeEventListener('click', closeOnClickAway);
-          }
-        };
-        document.addEventListener('click', closeOnClickAway);
-      }, 0);
+      grid.append(button);
     });
   }
 
-  const contactEnvelopeLink = document.getElementById('contact-envelope-link');
-  if (contactEnvelopeLink) {
-    contactEnvelopeLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      const existingPopup = document.querySelector('.contact-image-popup');
-      if (existingPopup) { existingPopup.remove(); return; }
-      const popup = document.createElement('div');
-      popup.className = 'contact-image-popup';
-      const emailLink = document.createElement('a');
-      emailLink.className = 'contact-popup-email';
-      emailLink.href = 'mailto:jennyxu2012@gmail.com';
-      emailLink.textContent = 'jennyxu2012@gmail.com';
-      popup.appendChild(emailLink);
-      document.body.appendChild(popup);
-      const iconRect = contactEnvelopeLink.getBoundingClientRect();
-      popup.style.top = `${iconRect.bottom + 15}px`;
-      popup.style.right = `${window.innerWidth - iconRect.right}px`;
-      popup.style.marginRight = "-50px";
-      setTimeout(() => popup.classList.add('is-visible'), 10);
-      setTimeout(() => {
-        const closeOnClickAway = (event) => {
-          if (!popup.contains(event.target) && !contactEnvelopeLink.contains(event.target)) {
-            popup.remove();
-            document.removeEventListener('click', closeOnClickAway);
-          }
-        };
-        document.addEventListener('click', closeOnClickAway);
-      }, 0);
+  document.querySelectorAll('[data-window-id]').forEach(button => {
+    button.addEventListener('click', () => {
+      const id = button.dataset.windowId;
+      const template = document.getElementById(`${id}-content`);
+      if (!template) return;
+      pane.innerHTML = template.innerHTML;
+      document.getElementById('dialog-title').textContent = titles[id];
+      if (id === 'gallery') buildGallery();
+      dialog.showModal();
+      pane.scrollTop = 0;
+      if (button.dataset.project) {
+        const project = [...pane.querySelectorAll('.project-entry')].find(entry => entry.querySelector('h4').textContent.startsWith(button.dataset.project));
+        if (project) project.scrollIntoView({ block: 'start' });
+      }
     });
+  });
+
+  [dialog, photoDialog].forEach(modal => {
+    modal.querySelector('.close-btn').addEventListener('click', () => modal.close());
+    // Only dismiss when both the press and release happen on the backdrop.
+    let pressedBackdrop = false;
+    const outside = event => {
+      const rect = modal.getBoundingClientRect();
+      return event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
+    };
+    modal.addEventListener('pointerdown', event => { pressedBackdrop = event.target === modal && outside(event); });
+    modal.addEventListener('click', event => {
+      if (pressedBackdrop && event.target === modal && outside(event)) modal.close();
+      pressedBackdrop = false;
+    });
+  });
+
+  let toastTimeout;
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('is-visible');
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => toast.classList.remove('is-visible'), 5000);
   }
+  const skoggy = document.getElementById('skoggy-button');
+  skoggy.addEventListener('click', () => {
+    skoggy.classList.remove('is-waving');
+    // Restart the little wave on each click, including repeated clicks.
+    void skoggy.offsetWidth;
+    skoggy.classList.add('is-waving');
+    showToast('Skoggy says hi!');
+  });
+  skoggy.addEventListener('animationend', () => skoggy.classList.remove('is-waving'));
+  document.getElementById('discord-link').addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText('hopenot');
+      showToast('Discord username copied: hopenot');
+    } catch {
+      showToast('Find me on Discord: hopenot');
+    }
+  });
+  document.getElementById('copyright-year').textContent = new Date().getFullYear();
 });

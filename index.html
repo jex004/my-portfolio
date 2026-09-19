@@ -2,223 +2,516 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Portfolio</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&family=Roboto:wght@300;400&family=Shadows+Into+Light&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Jenny Xu's digital scrapbook: a collection of design, development, data science, and everyday moments." />
+  <meta name="theme-color" content="#737b51" />
+  <title>Jenny Xu &mdash; A digital scrapbook</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;1,500&family=DM+Mono:wght@400;500&family=Caveat:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Styles & Scripts -->
   <link rel="stylesheet" href="styles.css" />
+  <script src="moodys-intern-slides/slides.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <header>
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light and dark mode">
-        <img src="imgs/sunny-skog.png" alt="Switch to Dark Mode" class="theme-icon night-skog-icon">
-        <img src="imgs/night-skog.png" alt="Switch to Light Mode" class="theme-icon sunny-skog-icon">
-    </button>
-    <nav>
-      <a href="#" data-window-id="about">About</a>
-      <a href="#" data-window-id="projects">Projects</a>
-      <a href="#" data-window-id="gallery">Gallery</a>
-      <a href="#" data-window-id="resume">Resume</a>
-      <a href="#" id="contact-envelope-link" class="contact-icon-link" aria-label="Contact">
-        <img src="imgs/closed_contact.png" alt="Contact" class="contact-icon contact-closed">
-        <img src="imgs/open_contact.png" alt="Contact" class="contact-icon contact-open">
-      </a>
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <a class="wordmark" href="./" aria-label="Jenny Xu home"><span aria-hidden="true">jx</span></a>
+    <nav aria-label="Main navigation">
+      <button data-window-id="about">About</button>
+      <button data-window-id="projects">Projects</button>
+      <button data-window-id="gallery">Gallery</button>
+      <button data-window-id="resume">R&eacute;sum&eacute;</button>
     </nav>
+    <div class="header-actions">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false">
+        <span aria-hidden="true">&#9790;</span>
+      </button>
+      <a class="contact-link" href="mailto:jennyxu2012@gmail.com">
+        Contact <span aria-hidden="true">&#8599;</span>
+      </a>
+    </div>
   </header>
 
-  <main></main>
-  
-  <div class="home-window is-active">
-    <div class="window-header">
-      <span>Home</span>
-    </div>
-    <div class="window-content">
-      <img src="imgs/main-avatar.jpg" alt="My Photo" class="avatar" />
-      <h1>Hi! I'm Jenny</h1>
-      <p class="tagline">illustrator • designer • developer<br/>undergrad at UCSD</p>
-    </div>
-  </div>
+  <main id="main" class="scrapbook-page">
+    <!-- Chapter 1: Scrapbook Overview -->
+    <section class="scrapbook" aria-label="Jenny's scrapbook portfolio">
+      <div class="page-title">
+        <span class="folio">A PERSONAL PORTFOLIO</span>
+        <h1>
+          <span class="name-script">Jenny</span>
+          <span class="name-cutout">Xu</span>
+        </h1>
+        <p class="title-caption">art, design &amp; code</p>
+      </div>
 
+      <article class="intro-note">
+        <span class="tape" aria-hidden="true"></span>
+        <h2>Hi, I'm Jenny.</h2>
+        <p>I'm a data science student at UC San Diego.<br />I also design and code things sometimes!</p>
+        <button class="primary-button" data-window-id="about">
+          More about me <span aria-hidden="true">&#8599;</span>
+        </button>
+      </article>
+
+      <div class="photo-composition">
+        <button class="garden-print" data-window-id="gallery" aria-label="Open my photo gallery">
+          <img src="imgs/gallery/galentines.jpg" alt="Jenny holding flowers on Galentine?s Day" fetchpriority="high" />
+          <span class="print-caption">
+            <span class="handwritten">⋆. 𐙚˚࿔ This is me 𝜗𝜚˚⋆</span>
+            <span>Gallery &#8599;</span>
+          </span>
+        </button>
+        <figure class="portrait-print">
+          <span class="paperclip" aria-hidden="true"></span>
+          <img src="imgs/gallery/21-birthday.jpeg" alt="Jenny celebrating her 21st birthday" />
+          <figcaption class="handwritten">໒꒰ྀི ˶• ༝ •˶ ꒱ྀི১</figcaption>
+        </figure>
+        <button class="skoggy-cutout" id="skoggy-button" aria-label="Say hi to Skoggy">
+          <img src="imgs/skoggy.png" alt="Skoggy, my teddy bear drawing" />
+        </button>
+        <span class="photo-tab" aria-hidden="true">PHOTOS</span>
+      </div>
+
+      <article class="project-index" aria-labelledby="selected-work-title">
+        <span class="folder-tab">PROJECTS</span>
+        <div class="index-heading">
+          <span class="eyebrow">DESIGN / DEVELOPMENT / DATA</span>
+          <h2 id="selected-work-title">Selected work</h2>
+        </div>
+        <div class="work-list">
+          <button data-window-id="projects" data-project="Game Library">
+            <span class="project-number">01</span>
+            <span>
+              <strong>Game Library</strong>
+              <small>Web development &middot; In progress</small>
+            </span>
+            <span class="row-arrow" aria-hidden="true">&#8599;</span>
+          </button>
+          <button data-window-id="projects" data-project="ode2net">
+            <span class="project-number">02</span>
+            <span>
+              <strong>ode2net</strong>
+              <small>Machine learning &middot; Music</small>
+            </span>
+            <span class="row-arrow" aria-hidden="true">&#8599;</span>
+          </button>
+          <button data-window-id="projects" data-project="Treadmill Fitness">
+            <span class="project-number">03</span>
+            <span>
+              <strong>Treadmill Fitness<br />Visualization</strong>
+              <small>Interactive data visualization</small>
+            </span>
+            <span class="row-arrow" aria-hidden="true">&#8599;</span>
+          </button>
+        </div>
+        <button class="index-link" data-window-id="projects">
+          <span>Explore all projects</span>
+          <span aria-hidden="true">&#8599;</span>
+        </button>
+      </article>
+    </section>
+
+    <!-- Chapter 2: Moody's Internship Slides -->
+    <section class="internship-feature" id="internship" aria-labelledby="internship-title" aria-roledescription="carousel">
+      <div class="chapter-label">
+        <span>02 / INTERNSHIP NOTES</span>
+        <span>SUMMER 2026</span>
+      </div>
+      <div class="presentation-sheet">
+        <span class="tape" aria-hidden="true"></span>
+        <div class="presentation-heading">
+          <div>
+            <p class="eyebrow">SOFTWARE ENGINEERING INTERN</p>
+            <h2 id="internship-title">Summer at Moody&rsquo;s</h2>
+          </div>
+          <p>My final presentation with the<br />Multimedia &amp; Graphics team.</p>
+        </div>
+        <div class="slide-preview" id="slide-preview" tabindex="0" role="group" aria-label="Presentation slides. Use arrow keys to navigate.">
+          <img id="slide-image" src="imgs/moodys/slide-01.webp" width="1440" height="900" alt="Internship final presentation" />
+          <a id="flipbook-link" class="flipbook-link" href="https://www.moodys.com/web/en/us/insights/data-stories/corporate-defaults-edged-down-in-first-half-of-2026-from-year-earlier-period.html" target="_blank" rel="noopener noreferrer" hidden>View the flipbook &#8599;</a>
+        </div>
+        <div class="slide-caption">
+          <h3 id="slide-title">Internship final presentation</h3>
+          <p id="slide-summary">A look back at my software engineering internship on the Multimedia and Graphics team.</p>
+        </div>
+        <div class="slide-controls">
+          <button data-slide-step="-1" aria-label="Previous slide" disabled>&#8592;</button>
+          <div class="slide-pagination" id="slide-pagination" role="group" aria-label="Choose a slide"></div>
+          <button data-slide-step="1" aria-label="Next slide">&#8594;</button>
+        </div>
+        <p class="slide-position" id="slide-position" role="status" aria-live="polite" aria-atomic="true">Slide 1 of 8</p>
+      </div>
+    </section>
+
+    <!-- Chapter 3: Off The Clock -->
+    <section class="off-clock" aria-labelledby="off-clock-title">
+      <div class="chapter-label">
+        <span>03 / BEHIND THE SCENES</span>
+        <span aria-hidden="true">&#8595;</span>
+      </div>
+      <figure class="music-receipt">
+        <span class="tape" aria-hidden="true"></span>
+        <figcaption>
+          <span class="handwritten">On repeat</span>
+          <span>SEPTEMBER 2026</span>
+        </figcaption>
+        <button class="receipt-photo" data-photo-src="imgs/receiptify-sep-2026.png" aria-label="Enlarge my September 2026 Receiptify">
+          <img src="imgs/receiptify-sep-2026.png" alt="Jenny's September 2026 Receiptify: ten most-played tracks, including We Are by ONE OK ROCK, Enchanted by Taylor Swift, and Love Wins All by IU." loading="lazy" />
+        </button>
+        <button type="button" class="receipt-hint" data-photo-src="imgs/receiptify-sep-2026.png" aria-label="Enlarge my September 2026 Receiptify">Click to enlarge &#8599;</button>
+      </figure>
+
+      <article class="interests-note">
+        <span class="tape" aria-hidden="true"></span>
+        <h2 id="off-clock-title">Away from my laptop</h2>
+        <p>A few things I like to make time for:</p>
+        <ul class="handwritten">
+          <li>drawing &amp; doing my nails ⋆✴︎</li>
+          <li>hosting events ✮⋆˙</li>
+          <li>a good karaoke session ݁♬⋆.˚𝄞</li>
+          <li>traveling ᯓ ✈︎</li>
+        </ul>
+        <div class="note-signoff">
+          <span class="pencil-stars" aria-hidden="true">&#10023; &#10023;</span>
+        </div>
+      </article>
+
+      <div class="pocket-album">
+        <span class="album-tab">TRAVEL ALBUM</span>
+        <button class="album-photo" id="album-photo" aria-label="Enlarge photo: Norway">
+          <img id="album-image" src="imgs/gallery/norway.jpg" alt="A snowy street in Norway" loading="lazy" />
+          <span id="album-caption" class="handwritten">Norway</span>
+        </button>
+        <div class="album-controls">
+          <button id="album-prev" aria-label="Previous album photo">&#8592;</button>
+          <span id="album-position" aria-live="polite">01 / 06</span>
+          <button id="album-next" aria-label="Next album photo">&#8594;</button>
+        </div>
+      </div>
+
+      <a class="resume-ticket" href="docs/jenny-xu-resume.pdf" target="_blank" rel="noopener noreferrer">
+        <span class="ticket-mark" aria-hidden="true">JX</span>
+        <span>
+          <strong>My r&eacute;sum&eacute;</strong>
+          <small>Experience, projects &amp; skills &middot; PDF</small>
+        </span>
+        <span aria-hidden="true">&#8599;</span>
+      </a>
+    </section>
+  </main>
+
+  <!-- Modal Dialog Templates -->
   <div id="window-templates" style="display: none;">
-
+    <!-- About Window -->
     <div id="about-content">
-      <div class="about-me-container">
-        <div class="about-avatar-container fade-in-element">
-          <img src="imgs/main-avatar.jpg" alt="An illustration of Jenny" class="about-illustration" />
+      <article class="about-page">
+        <div class="about-spread">
+          <div class="about-story">
+            <p class="eyebrow">NEW JERSEY / SAN DIEGO</p>
+            <h2>Hi, I'm Jenny.</h2>
+            <p>I'm studying data science at UC San Diego, with a minor in economics. Despite going to school in California, I grew up in Warren, New Jersey.</p>
+            <p>I doodle, design, and build things for fun. My projects bring together visual design, code, and data from small web apps to machine learning and interactive charts.</p>
+            <dl class="about-details">
+              <div><dt>Studying</dt><dd>Data science + economics</dd></div>
+            </dl>
+          </div>
         </div>
-        <div class="about-intro-text fade-in-element">
-          <h2 class="about-me">About Me</h2>
-          <p class="about-intro">
-            Welcome! I'm a passionate creator studying at UCSD, blending art with technology to build beautiful and intuitive digital experiences.
-          </p>
-        </div>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-note sticky-note-1 fade-in-element">
-          <h3><span class="icon">🎨</span> Design</h3>
-          <p>I focus on creating user-centric and visually aesthetic interfaces. My goal is to make every interaction a easy and enjoyable.</p>
-        </div>
-        <div class="skill-note sticky-note-2 fade-in-element">
-          <h3><span class="icon">💻</span> Development</h3>
-          <p>I love bringing ideas to life with code. From front-end frameworks to back-end logic, I enjoy the challenge of building robust and efficient applications.</p>
-        </div>
-        <div class="skill-note sticky-note-3 fade-in-element">
-          <h3><span class="icon">📊</span> Data Science</h3>
-          <p>Data can tell interesting stories. In order to discover these stories, I extract insights, build predictive models, and visualize complex information clearly.</p>
-        </div>
-      </div>
+        <section class="about-practice" aria-label="What I work on">
+          <p class="eyebrow">WHAT I WORK ON</p>
+          <div class="about-practice-row"><span aria-hidden="true">01</span><h3>Design</h3><p>Layouts, interfaces, and the small visual details that make a page feel personal.</p></div>
+          <div class="about-practice-row"><span aria-hidden="true">02</span><h3>Development</h3><p>Turning ideas into websites and apps, and figuring out how the pieces fit together.</p></div>
+          <div class="about-practice-row"><span aria-hidden="true">03</span><h3>Data</h3><p>Exploring patterns with machine learning and making information easier to read through visualization.</p></div>
+        </section>
+        <aside class="about-margin-note">
+          <h3 class="handwritten">Fun fact</h3>
+          <p>I enjoy hosting fun events for my online gaming community! I love creating experiences that my friends all enjoy and managing a small team to produce these events happen :)</p>
+        </aside>
+      </article>
     </div>
-    
+
+    <!-- Gallery Window -->
     <div id="gallery-content">
       <h2>Gallery</h2>
       <div class="gallery-grid"></div>
     </div>
 
+    <!-- Projects Window -->
     <div id="projects-content">
       <div class="projects-list">
         <h2>Projects</h2>
 
         <div class="project-entry fade-in-element">
-          <div class="project-visual"><img src="imgs/project-placeholder.png" alt="Project Visual" loading="lazy"></div>
+          <div class="project-visual" aria-hidden="true"></div>
           <div class="project-details">
-            <div class="entry-header"><h4>Game Library (WIP)</h4><span>July 2025 - Present</span></div>
+            <div class="entry-header">
+              <h4>Game Library (WIP)</h4>
+              <span>July 2025 - Present</span>
+            </div>
             <p>An online gameroom hosting website that supports a small library of games.</p>
-            <div class="project-links"><a href="https://game-library-orcin-six.vercel.app/" target="_blank" rel="noopener noreferrer">View Project</a><a href="https://github.com/jex004/game-library" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
-            <div class="project-badges"><span class="badge">JavaScript</span><span class="badge">CSS</span><span class="badge">Next.js</span><span class="badge">Firebase</span><span class="badge">Vercel</span></div>
+            <div class="project-links">
+              <a href="https://game-library-orcin-six.vercel.app/" target="_blank" rel="noopener noreferrer">View Project</a>
+              <a href="https://github.com/jex004/game-library" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+            </div>
+            <div class="project-badges">
+              <span class="badge">JavaScript</span>
+              <span class="badge">CSS</span>
+              <span class="badge">Next.js</span>
+              <span class="badge">Firebase</span>
+              <span class="badge">Vercel</span>
+            </div>
           </div>
         </div>
-        <hr class="project-separator">
+        <hr class="project-separator" />
 
         <div class="project-entry fade-in-element">
-          <div class="project-visual"><img src="imgs/project-placeholder.png" alt="Project Visual" loading="lazy"></div>
+          <div class="project-visual" aria-hidden="true"></div>
           <div class="project-details">
-            <div class="entry-header"><h4>My Portfolio (WIP)</h4><span>June 2025 - Present</span></div>
+            <div class="entry-header">
+              <h4>My Portfolio (WIP)</h4>
+              <span>June 2025 - Present</span>
+            </div>
             <p>My own personal portfolio website!</p>
-            <div class="project-links"><a href="https://github.com/jex004/my-portfolio" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
-            <div class="project-badges"><span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">JavaScript</span></div>
+            <div class="project-links">
+              <a href="https://github.com/jex004/my-portfolio" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+            </div>
+            <div class="project-badges">
+              <span class="badge">HTML</span>
+              <span class="badge">CSS</span>
+              <span class="badge">JavaScript</span>
+            </div>
           </div>
         </div>
-        <hr class="project-separator">
+        <hr class="project-separator" />
 
         <div class="project-entry fade-in-element">
-          <div class="project-visual"><img src="imgs/project-placeholder.png" alt="Project Visual" loading="lazy"></div>
+          <div class="project-visual" aria-hidden="true"></div>
           <div class="project-details">
-            <div class="entry-header"><h4>Smart Ticket Classifier</h4><span>June 2025</span></div>
+            <div class="entry-header">
+              <h4>Smart Ticket Classifier</h4>
+              <span>June 2025</span>
+            </div>
             <p>A simple app that classifies IT tickets into different categories to help support team members identify how to help customers faster. A basic starter demo for my RTS internship.</p>
-            <div class="project-links"><a href="https://github.com/jex004/ticket-classifier" target="_blank" rel="noopener noreferrer">View on Github</a></div>
-            <div class="project-badges"><span class="badge">Python</span><span class="badge">NLP</span><span class="badge">spaCy</span><span class="badge">NLTK</span><span class="badge">Streamlit</span></div>
+            <div class="project-links">
+              <a href="https://github.com/jex004/ticket-classifier" target="_blank" rel="noopener noreferrer">View on Github</a>
+            </div>
+            <div class="project-badges">
+              <span class="badge">Python</span>
+              <span class="badge">NLP</span>
+              <span class="badge">spaCy</span>
+              <span class="badge">NLTK</span>
+              <span class="badge">Streamlit</span>
+            </div>
           </div>
         </div>
-        <hr class="project-separator">
-        
+        <hr class="project-separator" />
+
         <div class="project-entry fade-in-element">
-          <div class="project-visual"><img src="imgs/project-placeholder.png" alt="Project Visual" loading="lazy"></div>
+          <div class="project-visual" aria-hidden="true"></div>
           <div class="project-details">
-            <div class="entry-header"><h4>Shinse.AI</h4><span>June 2025</span></div>
+            <div class="entry-header">
+              <h4>Shinse.AI</h4>
+              <span>June 2025</span>
+            </div>
             <p>A team project exploring synthetic audio for training voice cloning models, addressing data scarcity and privacy concerns in speech AI.</p>
-            <div class="project-links"><a href="https://shinseai.pages.dev/" target="_blank" rel="noopener noreferrer">View Project</a><a href="https://github.com/COGS108/Group156-SP25" target="_blank" rel="noopener noreferrer">View on Github</a></div>
-            <div class="project-badges"><span class="badge">Python</span><span class="badge">Machine Learning</span><span class="badge">RVC</span><span class="badge">Google Colab</span></div>
+            <div class="project-links">
+              <a href="https://shinseai.pages.dev/" target="_blank" rel="noopener noreferrer">View Project</a>
+              <a href="https://github.com/COGS108/Group156-SP25" target="_blank" rel="noopener noreferrer">View on Github</a>
+            </div>
+            <div class="project-badges">
+              <span class="badge">Python</span>
+              <span class="badge">Machine Learning</span>
+              <span class="badge">RVC</span>
+              <span class="badge">Google Colab</span>
+            </div>
           </div>
         </div>
-        <hr class="project-separator">
-        
+        <hr class="project-separator" />
+
         <div class="project-entry fade-in-element">
-          <div class="project-visual"><img src="imgs/project-placeholder.png" alt="Project Visual" loading="lazy"></div>
+          <div class="project-visual" aria-hidden="true"></div>
           <div class="project-details">
-            <div class="entry-header"><h4>ode2net</h4><span>May 2025</span></div>
+            <div class="entry-header">
+              <h4>ode2net</h4>
+              <span>May 2025</span>
+            </div>
             <p>Co-developed a deep learning pipeline to generate expressive, emotion-conditioned MIDI music from full-text novel chapters.</p>
-            <div class="project-links"><a href="https://github.com/DevKlim/ode2net" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
-            <div class="project-badges"><span class="badge">Python</span><span class="badge">Deep Learning</span><span class="badge">NLP</span><span class="badge">MIDI</span></div>
+            <div class="project-links">
+              <a href="https://github.com/DevKlim/ode2net" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+            </div>
+            <div class="project-badges">
+              <span class="badge">Python</span>
+              <span class="badge">Deep Learning</span>
+              <span class="badge">NLP</span>
+              <span class="badge">MIDI</span>
+            </div>
           </div>
         </div>
-        <hr class="project-separator">
+        <hr class="project-separator" />
 
         <div class="project-entry fade-in-element">
-          <div class="project-visual"><img src="imgs/project-placeholder.png" alt="Project Visual" loading="lazy"></div>
+          <div class="project-visual" aria-hidden="true"></div>
           <div class="project-details">
-            <div class="entry-header"><h4>beefai</h4><span>May 2025</span></div>
+            <div class="entry-header">
+              <h4>beefai</h4>
+              <span>May 2025</span>
+            </div>
             <p>Helped develop a system where an AI can generate and perform rap verses in real-time for an AI Rap Battle Website.</p>
-            <div class="project-links"><a href="https://github.com/DevKlim/beefai" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
-            <div class="project-badges"><span class="badge">Python</span><span class="badge">PyTorch</span><span class="badge">Deep Learning</span><span class="badge">NLP</span></div>
+            <div class="project-links">
+              <a href="https://github.com/DevKlim/beefai" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+            </div>
+            <div class="project-badges">
+              <span class="badge">Python</span>
+              <span class="badge">PyTorch</span>
+              <span class="badge">Deep Learning</span>
+              <span class="badge">NLP</span>
+            </div>
           </div>
         </div>
-        <hr class="project-separator">
+        <hr class="project-separator" />
 
         <div class="project-entry fade-in-element">
-          <div class="project-visual"><img src="imgs/project-placeholder.png" alt="Project Visual" loading="lazy"></div>
+          <div class="project-visual" aria-hidden="true"></div>
           <div class="project-details">
-            <div class="entry-header"><h4>Treadmill Fitness Visualization</h4><span>March 2025</span></div>
+            <div class="entry-header">
+              <h4>Treadmill Fitness Visualization</h4>
+              <span>March 2025</span>
+            </div>
             <p>An interactive simulation platform modeling endurance performance across different age and gender groups. Created with a co-developer.</p>
-            <div class="project-links"><a href="https://seashello.github.io/dsc106-final-project" target="_blank" rel="noopener noreferrer">View Project</a><a href="https://github.com/seashello/dsc106-final-project" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
-            <div class="project-badges"><span class="badge">JavaScript</span><span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">Asesprite</span></div>
+            <div class="project-links">
+              <a href="https://seashello.github.io/dsc106-final-project" target="_blank" rel="noopener noreferrer">View Project</a>
+              <a href="https://github.com/seashello/dsc106-final-project" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+            </div>
+            <div class="project-badges">
+              <span class="badge">JavaScript</span>
+              <span class="badge">HTML</span>
+              <span class="badge">CSS</span>
+              <span class="badge">Asesprite</span>
+            </div>
           </div>
         </div>
-        <hr class="project-separator">
-        
-        <div class="project-entry fade-in-element">
-          <div class="project-visual"><img src="imgs/project-placeholder.png" alt="Project Visual" loading="lazy"></div>
-          <div class="project-details">
-            <div class="entry-header"><h4>Bikewatching</h4><span>February 2025</span></div>
-            <p>An interactive site displaying a map of the bikeshare system in the Boston/Cambridge area.</p>
-            <div class="project-links"><a href="https://jex004.github.io/bikewatching/" target="_blank" rel="noopener noreferrer">View Project</a><a href="https://github.com/jex004/bikewatching" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
-            <div class="project-badges"><span class="badge">JavaScript</span><span class="badge">HTML</span><span class="badge">CSS</span></div>
-          </div>
-        </div>
-        <hr class="project-separator">
-        
-        <div class="project-entry fade-in-element">
-          <div class="project-visual"><img src="imgs/project-placeholder.png" alt="Project Visual" loading="lazy"></div>
-          <div class="project-details">
-            <div class="entry-header"><h4>Exam Stress Visualization</h4><span>February 2025</span></div>
-            <p>Collaborated in a team of four to design an "interactive data visualization that enables the comparison of students' stress levels across different exams.</p>
-            <div class="project-links"><a href="https://clairelee-ucsd.github.io/dsc106-project3/" target="_blank" rel="noopener noreferrer">View Project</a><a href="https://github.com/clairelee-ucsd/dsc106-project3" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
-            <div class="project-badges"><span class="badge">Python</span><span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">JavaScript</span></div>
-          </div>
-        </div>
-        <hr class="project-separator">
-        
-        <div class="project-entry fade-in-element">
-          <div class="project-visual"><img src="imgs/project-placeholder.png" alt="Project Visual" loading="lazy"></div>
-          <div class="project-details">
-            <div class="entry-header"><h4>Recipe Complexity Report</h4><span>November 2024</span></div>
-            <p>An analysis of the impact of recipe complexity on popularity, using data from food.com. I explored the dataset, handled missing data, and used feature engineering.</p>
-            <div class="project-links"><a href="https://jex004.github.io/Recipe-Complexity-Report/" target="_blank" rel="noopener noreferrer">View Project</a><a href="https://github.com/jex004/Recipe-Complexity-Report" target="_blank" rel="noopener noreferrer">View on Github</a></div>
-            <div class="project-badges"><span class="badge">Python</span></div>
-          </div>
-        </div>
-        <hr class="project-separator">
-        
-        <div class="project-entry fade-in-element">
-          <div class="project-visual"><img src="imgs/project-placeholder.png" alt="Project Visual" loading="lazy"></div>
-          <div class="project-details">
-            <div class="entry-header"><h4>Simple Movie Search Engine</h4><span>May 2024</span></div>
-            <p>Created a simple movie search engine using a BST for the DSC30 class at UCSD.</p>
-            <div class="project-links"><a href="https://github.com/jex004/simple-movie-search-engine" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
-            <div class="project-badges"><span class="badge">Python</span><span class="badge">Data Structures</span></div>
-          </div>
-        </div>
-        <hr class="project-separator">
+        <hr class="project-separator" />
 
         <div class="project-entry fade-in-element">
-          <div class="project-visual"><img src="imgs/project-placeholder.png" alt="Project Visual" loading="lazy"></div>
+          <div class="project-visual" aria-hidden="true"></div>
           <div class="project-details">
-            <div class="entry-header"><h4>Loan Applications Project</h4><span>March 2024</span></div>
-            <p>Analyzed a dataset of loan applicant data to assess eligibility based on factors such as debt-to-income ratio, FICO scores, and home ownership.</p>
-            <div class="project-badges"><span class="badge">Python</span></div>
+            <div class="entry-header">
+              <h4>Bikewatching</h4>
+              <span>February 2025</span>
+            </div>
+            <p>An interactive site displaying a map of the bikeshare system in the Boston/Cambridge area.</p>
+            <div class="project-links">
+              <a href="https://jex004.github.io/bikewatching/" target="_blank" rel="noopener noreferrer">View Project</a>
+              <a href="https://github.com/jex004/bikewatching" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+            </div>
+            <div class="project-badges">
+              <span class="badge">JavaScript</span>
+              <span class="badge">HTML</span>
+              <span class="badge">CSS</span>
+            </div>
           </div>
         </div>
-        
+        <hr class="project-separator" />
+
+        <div class="project-entry fade-in-element">
+          <div class="project-visual" aria-hidden="true"></div>
+          <div class="project-details">
+            <div class="entry-header">
+              <h4>Exam Stress Visualization</h4>
+              <span>February 2025</span>
+            </div>
+            <p>Collaborated in a team of four to design an interactive data visualization that enables the comparison of students' stress levels across different exams.</p>
+            <div class="project-links">
+              <a href="https://clairelee-ucsd.github.io/dsc106-project3/" target="_blank" rel="noopener noreferrer">View Project</a>
+              <a href="https://github.com/clairelee-ucsd/dsc106-project3" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+            </div>
+            <div class="project-badges">
+              <span class="badge">Python</span>
+              <span class="badge">HTML</span>
+              <span class="badge">CSS</span>
+              <span class="badge">JavaScript</span>
+            </div>
+          </div>
+        </div>
+        <hr class="project-separator" />
+
+        <div class="project-entry fade-in-element">
+          <div class="project-visual" aria-hidden="true"></div>
+          <div class="project-details">
+            <div class="entry-header">
+              <h4>Recipe Complexity Report</h4>
+              <span>November 2024</span>
+            </div>
+            <p>An analysis of the impact of recipe complexity on popularity, using data from food.com. I explored the dataset, handled missing data, and used feature engineering.</p>
+            <div class="project-links">
+              <a href="https://jex004.github.io/Recipe-Complexity-Report/" target="_blank" rel="noopener noreferrer">View Project</a>
+              <a href="https://github.com/jex004/Recipe-Complexity-Report" target="_blank" rel="noopener noreferrer">View on Github</a>
+            </div>
+            <div class="project-badges">
+              <span class="badge">Python</span>
+            </div>
+          </div>
+        </div>
+        <hr class="project-separator" />
+
+        <div class="project-entry fade-in-element">
+          <div class="project-visual" aria-hidden="true"></div>
+          <div class="project-details">
+            <div class="entry-header">
+              <h4>Simple Movie Search Engine</h4>
+              <span>May 2024</span>
+            </div>
+            <p>Created a simple movie search engine using a BST for the DSC30 class at UCSD.</p>
+            <div class="project-links">
+              <a href="https://github.com/jex004/simple-movie-search-engine" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+            </div>
+            <div class="project-badges">
+              <span class="badge">Python</span>
+              <span class="badge">Data Structures</span>
+            </div>
+          </div>
+        </div>
+        <hr class="project-separator" />
+
+        <div class="project-entry fade-in-element">
+          <div class="project-visual" aria-hidden="true"></div>
+          <div class="project-details">
+            <div class="entry-header">
+              <h4>Loan Applications Project</h4>
+              <span>March 2024</span>
+            </div>
+            <p>Analyzed a dataset of loan applicant data to assess eligibility based on factors such as debt-to-income ratio, FICO scores, and home ownership.</p>
+            <div class="project-badges">
+              <span class="badge">Python</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
+    <!-- Resume Window -->
     <div id="resume-content">
       <div class="resume">
+        <div class="resume-actions">
+          <a href="docs/jenny-xu-resume.pdf" target="_blank" rel="noopener noreferrer">Open PDF &#8599;</a>
+          <a href="docs/jenny-xu-resume.pdf" download="Jenny Xu Resume.pdf">Download r&eacute;sum&eacute; &#8595;</a>
+        </div>
         <header class="resume-header">
           <h2>Jenny Xu</h2>
-          <p>jxuhn2004@gmail.com • (908) 405-1912 • <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a> • <a href="#" target="_blank" rel="noopener noreferrer">Github</a> • <a href="#" target="_blank" rel="noopener noreferrer">Portfolio</a></p>
+          <p>
+            jxuhn2004@gmail.com • (908) 405-1912 •
+            <a href="https://www.linkedin.com/in/jenny-xu-7b281b272/" target="_blank" rel="noopener noreferrer">LinkedIn</a> •
+            <a href="https://github.com/jex004" target="_blank" rel="noopener noreferrer">Github</a> •
+            <a href="./">Portfolio</a>
+          </p>
         </header>
-        
+
         <section>
           <h3>Education</h3>
           <div class="entry">
@@ -226,17 +519,27 @@
               <h4>University of California San Diego | La Jolla, CA</h4>
               <span>March 2027</span>
             </div>
-            <p><strong>B.S. in Data Science; Minor in Economics</strong> | GPA: 3.78/4.0</p>
+            <p><strong>B.S. in Data Science; Minor in Economics</strong> | GPA: 3.8/4.0</p>
             <p><em>Relevant Courses:</em> Computer Organization, Data Structures, Foundations of Programming, Algorithms & Analysis, Data Management, Data Visualization, ML: Learning Algorithms, Recommender Systems & Web Mining, Econometrics</p>
           </div>
         </section>
-        
+
         <section>
           <h3>Work Experience</h3>
           <div class="entry">
             <div class="entry-header">
-              <h4>LLM Engineer | Center for Applied Internet Data Analysis | La Jolla, CA</h4>
-              <span>July 2025 - Present</span>
+              <h4>Software Engineer Intern | Moody&rsquo;s Ratings | New York, NY</h4>
+              <span>June 2026 - August 2026</span>
+            </div>
+            <ul>
+              <li>Developed modular, reusable Layer Cake and D3.js components within SvelteKit ecosystem, integrating them into the official, public facing Flipbook production template used for monthly and quarterly financial publications.</li>
+              <li>Drove full stack application stability by engineering robust UI components, expanding test coverage, and resolving production bugs while managing the deployment of optimized static assets to secure on premise servers.</li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-header">
+              <h4>LLM Engineer Intern | Center for Applied Internet Data Analysis | La Jolla, CA</h4>
+              <span>August 2025 - April 2026</span>
             </div>
             <ul>
               <li>Developed and optimized an ML tool for extracting resources from research papers, improving extraction efficiency.</li>
@@ -258,16 +561,6 @@
 
         <section>
           <h3>Projects</h3>
-          <div class="entry">
-            <div class="entry-header">
-              <h4>Game Library (In Progress) | <a href="https://game-library-orcin-six.vercel.app/" target="_blank" rel="noopener noreferrer">https://game-library-orcin-six.vercel.app/</a></h4>
-              <span>October 2025</span>
-            </div>
-            <ul>
-                <li>Developed a foundational real-time lobby system using Next.js and Firebase, allowing users to instantly create, join, and communicate in dynamic chat rooms and a serverless backend to automate lobby lifecycle management</li>
-                <li>Integrate a game library, allowing users to browse and select from a catalog of games before initiating a play session.</li>
-            </ul>
-          </div>
           <div class="entry">
             <div class="entry-header">
               <h4>Smart Ticket Classifier | <a href="https://smart-ticket-classifier.streamlit.app/" target="_blank" rel="noopener noreferrer">https://smart-ticket-classifier.streamlit.app/</a></h4>
@@ -313,41 +606,41 @@
         <section>
           <h3>SKILLS, TOOLS & INTERESTS</h3>
           <div class="entry">
-            <p><strong>Programming Languages:</strong> Python, Java, Javascript, SQL, R</p>
-            <p><strong>Skills:</strong> HTML; Power BI; Git; PyTorch; TensorFlow; MongoDB; React; Matplotlib; Google Cloud; AWS; NumPy; Node.js</p>
-            <p><strong>Hobbies:</strong> playing videogames, organizing & hosting events, art, doing manicures, travelling, playing tennis, cooking</p>
+            <p><strong>Programming Languages:</strong> Python, Javascript, SQL, Java, R</p>
+            <p><strong>Skills:</strong> HTML; CSS; Git; Scikit-Learn; PyTorch; TensorFlow; OpenAI API; Google Cloud; AWS; React; SvelteKit; Node.js</p>
           </div>
         </section>
       </div>
     </div>
-
   </div>
 
-  <footer>
-    <svg class="liquid-fill" viewBox="0 0 1000 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <path id="wavepath" d="M0 100 C250 80 250 80 500 100 S750 120 1000 100 S1250 80 1500 100 S1750 120 2000 100 V300 H0 Z">
-          <animateTransform attributeName="transform" type="translate" from="0,0" to="-1000,0" dur="2s" repeatCount="indefinite"/>
-        </path>
-      </defs>
-      <use xlink:href="#wavepath" x="0" y="5" fill="rgba(159,215,224,0.3)" />
-      <use xlink:href="#wavepath" x="0" y="10" fill="rgba(159,215,224,0.5)" />
-      <use xlink:href="#wavepath" x="0" y="15" fill="var(--blue)" />
-    </svg>
-    <div class="footer-content">
-      <div class="icon-row">
-        <a href="https://www.linkedin.com/in/jenny-xu-7b281b272/" target="_blank" rel="noopener noreferrer" class="icon-link icon-linkedin" aria-label="LinkedIn"></a>
-        <a href="#" id="discord-link" class="icon-link icon-discord" aria-label="Discord"></a>
-        <a href="https://github.com/jex004" target="_blank" rel="noopener noreferrer" class="icon-link icon-github" aria-label="GitHub"></a>
-        <a href="https://www.instagram.com/jenny._.xu/" target="_blank" rel="noopener noreferrer" class="icon-link icon-instagram" aria-label="Instagram"></a>
-      </div>
-      <p class="copyright-text">© 2025 Jenny Xu</p>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>&copy; <span id="copyright-year">2026</span> Jenny Xu</p>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/jenny-xu-7b281b272/" target="_blank" rel="noopener noreferrer">LinkedIn &#8599;</a>
+      <a href="https://github.com/jex004" target="_blank" rel="noopener noreferrer">GitHub &#8599;</a>
+      <a href="https://www.instagram.com/jenny._.xu/" target="_blank" rel="noopener noreferrer">Instagram &#8599;</a>
+      <button id="discord-link">Discord &#8599;</button>
     </div>
   </footer>
 
-  <img src="imgs/skoggy.png" class="footer-skoggy" alt="A cute teddy bear named skoggy" />
+  <!-- Dialog Modals -->
+  <dialog id="content-dialog" aria-labelledby="dialog-title">
+    <div class="window-bar dialog-bar">
+      <span id="dialog-title"></span>
+      <button class="close-btn" aria-label="Close window" autofocus>&times;</button>
+    </div>
+    <div class="window-content"></div>
+  </dialog>
 
-  <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script>
-  <script src="script.js" defer></script>
+  <dialog id="photo-dialog" aria-label="Photo viewer">
+    <button class="close-btn" aria-label="Close photo" autofocus>&times;</button>
+    <img alt="" />
+    <p></p>
+  </dialog>
+
+
+  <div class="toast" role="status" id="toast"></div>
 </body>
 </html>
