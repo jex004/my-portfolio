@@ -146,21 +146,19 @@ figure {
 }
 
 .wordmark {
-  display: grid;
-  place-items: center;
-  flex: 0 0 44px;
-  width: 44px;
-  height: 44px;
-  color: #fffef3;
-  border: 1px solid #fffef399;
-  border-radius: 50%;
-  font: italic 500 32px/1 'Cormorant Garamond', Georgia, serif;
-  letter-spacing: -2px;
-  padding-right: 3px;
+  display: block;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
   text-decoration: none;
-  text-shadow: 0 1px 5px #26331c88;
 }
-.wordmark:hover { background: #fffef318; }
+.wordmark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.wordmark:hover { opacity: .85; }
 
 .site-header nav {
   display: flex;
